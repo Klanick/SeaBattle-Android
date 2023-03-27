@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         }
         supportFragmentManager.beginTransaction()
             .setReorderingAllowed(true)
-            .add(R.id.container, fragment)
+            .add(R.id.container, fragment, "menuFragment")
             .commit()
     }
 }
