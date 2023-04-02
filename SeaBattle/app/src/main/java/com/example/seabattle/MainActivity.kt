@@ -7,13 +7,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val fragment = MenuFragment()
+        val fragment = LoginFragment()
         fragment.arguments = Bundle().apply {
             //todo put data
         }
         supportFragmentManager.beginTransaction()
             .setReorderingAllowed(true)
-            .add(R.id.container, fragment, "menuFragment")
+            .add(R.id.container, fragment, "loginFragment")
             .commit()
     }
 }
