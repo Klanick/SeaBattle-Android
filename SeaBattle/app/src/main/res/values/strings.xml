@@ -5,6 +5,19 @@
     <string name="passwordHint">password</string>
     <string name="registrationButton">registration</string>
     <string name="loginButton">enter</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="preGameHeader">Ships Position</string>
+    <string name="inputCoordinatesHeader">Enter Coordinates</string>
+    <string name="x1Hint">x1</string>
+    <string name="x2Hint">x2</string>
+    <string name="y1Hint">y1</string>
+    <string name="y2Hint">y2</string>
+    <string name="addButton">add</string>
+    <string name="deleteButton">delete</string>
+    <string name="shipListHeader">Ship List</string>
+    <string name="readyButton">ready</string>
+
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

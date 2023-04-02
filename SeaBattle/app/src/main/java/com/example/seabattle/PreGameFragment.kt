@@ -26,7 +26,7 @@ class PreGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val gameButton = binding.preGameConfirmButton
+        val gameButton = binding.preGameReadyButton
 
         gameButton.setOnClickListener {
             val fragment = GameFragment()
