@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.seabattle.databinding.FragmentGameBinding
-import com.example.seabattle.databinding.FragmentMenuBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -27,9 +26,9 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val gameButton = binding.quitButton
+        val quitButton = binding.quitButton
 
-        gameButton.setOnClickListener {
+        quitButton.setOnClickListener {
             val fragment = MenuFragment()
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.popBackStack()
