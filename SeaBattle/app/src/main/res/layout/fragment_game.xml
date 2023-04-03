@@ -1,16 +1,1623 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".GameFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/game_top_body"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:textAlignment="center"
-        android:textSize="40sp"/>
+        android:layout_height="80dp"
+        tools:ignore="MissingConstraints">
 
-</FrameLayout>
+        <Button
+            android:id="@+id/quit_button"
+            android:layout_width="130sp"
+            android:layout_height="50sp"
+            android:textAlignment="center"
+
+            android:text="@string/quit"
+
+            android:textSize="@dimen/fragment_vertical_margin"
+            tools:ignore="MissingConstraints,SpUsage"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="14dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/game_body"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/game_top_body">
+
+        <GridLayout
+            android:id="@+id/opponent_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:columnCount="10"
+            android:rowCount="10"
+            android:orientation="horizontal"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/our_grid"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/cell11"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/cell12"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/cell13"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/cell14"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/cell15"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/cell16"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/cell17"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/cell18"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/cell19"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/cell110"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:text="@string/ship"
+                android:gravity="center"
+                android:textColor="@color/red_a400"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:text="@string/ship"
+                android:textColor="@color/red_a400"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:text="@string/miss"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </GridLayout>
+
+
+        <TextView
+            android:id="@+id/number_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            android:text="1"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/opponent_grid"
+            app:layout_constraintLeft_toLeftOf="@id/opponent_grid"
+            app:layout_constraintRight_toLeftOf="@id/number_2"/>
+        <TextView
+            android:id="@+id/number_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            android:text="2"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/opponent_grid"
+            app:layout_constraintLeft_toRightOf="@id/number_1"
+            app:layout_constraintRight_toLeftOf="@id/number_3"/>
+        <TextView
+            android:id="@+id/number_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            android:text="3"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/opponent_grid"
+            app:layout_constraintLeft_toRightOf="@id/number_2"
+            app:layout_constraintRight_toLeftOf="@id/number_4"/>
+        <TextView
+            android:id="@+id/number_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            android:text="4"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/opponent_grid"
+            app:layout_constraintLeft_toRightOf="@id/number_3"
+            app:layout_constraintRight_toLeftOf="@id/number_5"/>
+        <TextView
+            android:id="@+id/number_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            android:text="5"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/opponent_grid"
+            app:layout_constraintLeft_toRightOf="@id/number_4"
+            app:layout_constraintRight_toLeftOf="@id/number_6"/>
+        <TextView
+            android:id="@+id/number_6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            android:text="6"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/opponent_grid"
+            app:layout_constraintLeft_toRightOf="@id/number_5"
+            app:layout_constraintRight_toLeftOf="@id/number_7"/>
+        <TextView
+            android:id="@+id/number_7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            android:text="7"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/opponent_grid"
+            app:layout_constraintLeft_toRightOf="@id/number_6"
+            app:layout_constraintRight_toLeftOf="@id/number_8"/>
+        <TextView
+            android:id="@+id/number_8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            android:text="8"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/opponent_grid"
+            app:layout_constraintLeft_toRightOf="@id/number_7"
+            app:layout_constraintRight_toLeftOf="@id/number_9"/>
+        <TextView
+            android:id="@+id/number_9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            android:text="9"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/opponent_grid"
+            app:layout_constraintLeft_toRightOf="@id/number_8"
+            app:layout_constraintRight_toLeftOf="@id/number_10" />
+        <TextView
+            android:id="@+id/number_10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            android:text="10"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/opponent_grid"
+            app:layout_constraintLeft_toRightOf="@id/number_9"
+            app:layout_constraintRight_toRightOf="@id/opponent_grid"/>
+
+        <GridLayout
+            android:id="@+id/our_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:columnCount="10"
+            android:rowCount="10"
+            android:orientation="horizontal"
+
+            app:layout_constraintTop_toBottomOf="@id/opponent_grid"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            >
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:text="@string/ship"
+                android:gravity="center"
+                android:textColor="@color/red_a400"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:text="@string/miss"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:text="@string/miss"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:text="@string/miss"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:text="@string/miss"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/cell"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </GridLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
