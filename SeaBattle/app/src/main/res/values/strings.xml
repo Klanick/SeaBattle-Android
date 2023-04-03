@@ -4,8 +4,8 @@
     <string name="registrationButton">Регистрация</string>
     <string name="loginButton">Войти</string>
 
-    <string name="preGameHeader">Позиция кораблей</string>
-    <string name="inputCoordinatesHeader">Добавьте координаты</string>
+    <string name="preGameHeader">Расположение кораблей</string>
+    <string name="inputCoordinatesHeader">Введите координаты</string>
     <string name="x1Hint">x1</string>
     <string name="x2Hint">x2</string>
     <string name="y1Hint">y1</string>
