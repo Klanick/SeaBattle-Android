@@ -34,6 +34,8 @@ class LoginFragment : Fragment() {
                 .commit()
         }
 
+
+
         registrationButton.setOnClickListener {
             val fragment = RegistrationFragment()
             requireActivity().supportFragmentManager.beginTransaction()
