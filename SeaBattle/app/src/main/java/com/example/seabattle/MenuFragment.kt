@@ -36,6 +36,23 @@ class MenuFragment : Fragment() {
                 .hide(this)
                 .add(R.id.container, fragment, "preGameFragment")
                 .addToBackStack(null)
+                .commit()
+        }
+        val exitButton = binding.exitButton
+
+        exitButton.setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.popBackStack()
+        }
+        val profileButton = binding.profileButton
+
+        profileButton.setOnClickListener {
+            val fragment = ProfileFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .setReorderingAllowed(true)
+                .hide(this)
+                .add(R.id.container, fragment, "profileFragment")
+                .addToBackStack(null)
                 //or just .replace(R.id.container, fragment)
                 .commit()
         }
