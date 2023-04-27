@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import com.example.seabattle.databinding.FragmentGameBinding
 
 /**
@@ -29,16 +30,9 @@ class GameFragment : Fragment() {
         val quitButton = binding.quitButton
 
         quitButton.setOnClickListener {
-            val fragment = MenuFragment()
-            val fragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.popBackStack()
-            fragmentManager.beginTransaction()
-                .setReorderingAllowed(true)
-                .hide(fragmentManager.findFragmentByTag("menuFragment")!!)
-                .hide(fragmentManager.findFragmentByTag("gameFragment")!!)
-                .add(R.id.container, fragment, "menuFragment")
-                .addToBackStack(null)
-                .commit()
+            requireActivity().supportFragmentManager.popBackStack(
+                "MenuToGame",
+                FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
     }
 }

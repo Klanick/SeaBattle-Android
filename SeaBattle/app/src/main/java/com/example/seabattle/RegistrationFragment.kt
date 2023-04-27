@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.seabattle.databinding.FragmentRegistrationBinding
 
 class RegistrationFragment : Fragment() {
@@ -24,13 +25,9 @@ class RegistrationFragment : Fragment() {
         val loginButton = binding.registration
 
         loginButton.setOnClickListener {
-            val fragment = LoginFragment()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .setReorderingAllowed(true)
-                .hide(this)
-                .add(R.id.container, fragment, "loginFragment")
-                .addToBackStack(null)
-                .commit()
+            requireActivity().supportFragmentManager.popBackStack(
+                "LoginToRegistration",
+                FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
     }
 }

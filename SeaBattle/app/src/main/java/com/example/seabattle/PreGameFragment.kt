@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import com.example.seabattle.databinding.FragmentPreGameBinding
 
 /**
@@ -19,7 +20,7 @@ class PreGameFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPreGameBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -31,13 +32,16 @@ class PreGameFragment : Fragment() {
         gameButton.setOnClickListener {
             val fragment = GameFragment()
             val fragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.popBackStack()
-            //todo maybe-add PauseFragment: user can continue or come back to menu
+
+            fragmentManager.popBackStack(
+                "MenuToPreGame",
+                FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
             fragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .hide(fragmentManager.findFragmentByTag("menuFragment")!!)
                 .add(R.id.container, fragment, "gameFragment")
-                .addToBackStack(null)
+                .addToBackStack("MenuToGame")
                 .commit()
         }
     }
