@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.seabattle.databinding.FragmentLoginBinding
+import androidx.fragment.app.FragmentManager
 import com.example.seabattle.databinding.FragmentProfileBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,7 +26,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -35,9 +35,9 @@ class ProfileFragment : Fragment() {
         val exitProfileButton = binding.profileExit
 
         exitProfileButton.setOnClickListener {
-            val fragment = MenuFragment()
-            val fragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.popBackStack()
+            requireActivity().supportFragmentManager.popBackStack(
+                "MenuToProfile",
+                FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
     }
 }

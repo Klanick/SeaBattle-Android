@@ -10,8 +10,10 @@
         android:id="@+id/pre_game__form"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintHeight_min="220dp"
+        app:layout_constraintHeight_percent="0.45"
         app:layout_constraintTop_toBottomOf="@id/pre_game__header"
-        app:layout_constraintBottom_toTopOf="@id/pre_game__gl_horizontal_middle"
+        app:layout_constraintBottom_toTopOf="@id/pre_game__list_header"
         android:background="@color/blue_100">
 
         <androidx.cardview.widget.CardView
@@ -186,7 +188,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/pre_game__form"
         android:textAlignment="center"
-        android:padding="10dp"
+        android:padding="5dp"
         android:textSize="20sp"
         android:text="@string/shipListHeader">
     </TextView>
@@ -222,11 +224,4 @@
         android:text="@string/readyButton"
         />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/pre_game__gl_horizontal_middle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>
