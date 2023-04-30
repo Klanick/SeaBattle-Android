@@ -10,7 +10,6 @@ interface ShipCollectionBuilder {
     @Throws(ShipSetBuilderException::class)
     fun tryBuild() : Collection<Ship>
 
-    //TODO Delete
     fun build() : Collection<Ship>
 
     class ShipSetBuilderException(message:String): Exception(message)

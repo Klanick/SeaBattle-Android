@@ -34,6 +34,14 @@ class PreGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val backButton = binding.preGameBackButton
+
+        backButton.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack(
+                "MenuToPreGame",
+                FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
+
         val gameButton = binding.preGameReadyButton
 
         gameButton.setOnClickListener {
