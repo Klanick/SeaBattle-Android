@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import com.example.seabattle.data.model.gameobjects.Ship
 import com.example.seabattle.databinding.FragmentGameBinding
 
+private const val ARG_SHIPS = "ships"
 /**
  * A simple [Fragment] subclass.
  * Use the [GameFragment.newInstance] factory method to
@@ -16,6 +18,15 @@ import com.example.seabattle.databinding.FragmentGameBinding
 class GameFragment : Fragment() {
     private var _binding: FragmentGameBinding? = null
     private val binding get() = _binding!!
+    private var ships: List<Ship>? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            //TODO replace from deprecated
+            ships = it.getParcelable(ARG_SHIPS)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

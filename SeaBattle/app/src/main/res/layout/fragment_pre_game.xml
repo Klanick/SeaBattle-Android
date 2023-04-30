@@ -123,7 +123,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/pre_game__form__button_1"
+            android:id="@+id/pre_game__form__delete_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
@@ -133,7 +133,7 @@
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/pre_game__form__button_2"
+            app:layout_constraintRight_toLeftOf="@id/pre_game__form__add_button"
             app:layout_constraintHorizontal_chainStyle="spread"
             android:layout_margin="10dp"
             android:textSize="15sp"
@@ -143,7 +143,7 @@
             />
 
         <Button
-            android:id="@+id/pre_game__form__button_2"
+            android:id="@+id/pre_game__form__add_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
@@ -153,7 +153,7 @@
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/pre_game__form__button_1"
+            app:layout_constraintLeft_toRightOf="@id/pre_game__form__delete_button"
             android:layout_margin="10dp"
             android:textSize="15sp"
 
@@ -165,7 +165,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:barrierDirection="top"
-            app:constraint_referenced_ids="pre_game__form__button_1, pre_game__form__button_2"
+            app:constraint_referenced_ids="pre_game__form__delete_button, pre_game__form__add_button"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
