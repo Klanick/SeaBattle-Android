@@ -22,7 +22,7 @@ class PreGameFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         shipSetBuilder =
-            StandardShipCollectionBuilder(RectangleBoard(0, 9, 0, 9))
+            StandardShipCollectionBuilder(board = RectangleFigure(0, 9, 0, 9))
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,10 +46,7 @@ class PreGameFragment : Fragment() {
 
         gameButton.setOnClickListener {
             try {
-                //TODO return back tryBuild()
-                //val ships : Collection<Ship> = shipSetBuilder!!.tryBuild()
-                val ships : Collection<Ship> = shipSetBuilder!!.build()
-
+                val ships : Collection<Ship> = shipSetBuilder!!.tryBuild()
                 val fragment = GameFragment()
                 fragment.arguments = Bundle().apply {
                     putParcelableArrayList("ships", ArrayList<Ship>(ships))
@@ -73,13 +70,16 @@ class PreGameFragment : Fragment() {
 
         binding.preGameFormAddButton.setOnClickListener {
             try {
-                shipSetBuilder?.tryAdd(
+                /** Temporary usage tryAddRandom instead of tryAdd :: For Testing */
+                shipSetBuilder?.tryAddRandom()
+                //shipSetBuilder?.tryCompleteRandom()
+                /*shipSetBuilder?.tryAdd(
                     RectangleShip(
                         binding.preGameFormEt1.text.toString().toInt(),
                         binding.preGameFormEt3.text.toString().toInt(),
                         binding.preGameFormEt2.text.toString().toInt(),
                         binding.preGameFormEt4.text.toString().toInt())
-                )
+                )*/
             } catch (e: ShipCollectionBuilder.ShipSetBuilderException) {
                 println(e.localizedMessage)
             } catch (e: NumberFormatException) {
@@ -88,14 +88,17 @@ class PreGameFragment : Fragment() {
         }
 
         binding.preGameFormDeleteButton.setOnClickListener {
+
             try {
-                shipSetBuilder?.tryDelete(
+                /** Temporary usage clear instead of tryDelete :: For Testing */
+                shipSetBuilder?.clear()
+                /*shipSetBuilder?.tryDelete(
                     RectangleShip(
                         binding.preGameFormEt1.text.toString().toInt(),
                         binding.preGameFormEt3.text.toString().toInt(),
                         binding.preGameFormEt2.text.toString().toInt(),
                         binding.preGameFormEt4.text.toString().toInt())
-                )
+                )*/
             } catch (e: ShipCollectionBuilder.ShipSetBuilderException) {
                 println(e.localizedMessage)
             } catch (e: NumberFormatException) {

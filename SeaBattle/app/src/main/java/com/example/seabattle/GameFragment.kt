@@ -24,7 +24,7 @@ class GameFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             //TODO replace from deprecated
-            ships = it.getParcelable(ARG_SHIPS)
+            ships = it.getParcelableArrayList(ARG_SHIPS)
         }
     }
 
