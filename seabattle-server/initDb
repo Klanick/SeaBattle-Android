@@ -1,0 +1,7 @@
+create table statistic (
+    user_id bigint,
+    total_games bigint,
+    total_wins bigint,
+    total_loses bigint,
+    total_ships_destroyed bigint,
+    total_ships_lost bigint);
