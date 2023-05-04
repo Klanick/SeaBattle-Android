@@ -2,10 +2,7 @@ package com.example.seabattleserver.controller;
 
 import com.example.seabattleserver.model.BooleanResponse;
 import com.example.seabattleserver.model.Statistic;
-import com.example.seabattleserver.model.User;
 import com.example.seabattleserver.service.StatisticService;
-import com.example.seabattleserver.service.UserService;
-import jakarta.security.auth.message.AuthException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

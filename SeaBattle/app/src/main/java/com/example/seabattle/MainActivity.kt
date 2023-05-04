@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    public fun getService(): SeaBattleService {
+    fun getService(): SeaBattleService {
         return seaBattleService;
     }
 }
