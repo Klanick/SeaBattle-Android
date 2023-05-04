@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import com.example.seabattle.databinding.FragmentMenuBinding
 
 /**
@@ -19,7 +20,7 @@ class MenuFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -30,13 +31,29 @@ class MenuFragment : Fragment() {
 
         gameButton.setOnClickListener {
             val fragment = PreGameFragment()
-            //requireActivity() - is bad decision, but we will have only one const activity, so...
             requireActivity().supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .hide(this)
                 .add(R.id.container, fragment, "preGameFragment")
-                .addToBackStack(null)
-                //or just .replace(R.id.container, fragment)
+                .addToBackStack("MenuToPreGame")
+                .commit()
+        }
+        val exitButton = binding.exitButton
+
+        exitButton.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack(
+                "LoginToMenu",
+                FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
+        val profileButton = binding.profileButton
+
+        profileButton.setOnClickListener {
+            val fragment = ProfileFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .setReorderingAllowed(true)
+                .hide(this)
+                .add(R.id.container, fragment, "profileFragment")
+                .addToBackStack("MenuToProfile")
                 .commit()
         }
     }

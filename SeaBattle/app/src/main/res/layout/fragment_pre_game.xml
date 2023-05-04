@@ -6,231 +6,227 @@
     android:layout_height="match_parent"
     tools:context=".PreGameFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pre_game__form"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/pre_game__header"
-        app:layout_constraintBottom_toTopOf="@id/pre_game__gl_horizontal_middle"
-        android:background="@color/blue_100">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/pre_game__form_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="-5dp"
-            app:cardCornerRadius="5dp"
-            app:cardBackgroundColor="?attr/colorPrimary">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="5dp"
-                android:padding="5dp"
-
-                android:text="@string/hello_blank_fragment"
-
-                android:textAlignment="center"
-                android:textColor="?attr/colorOnPrimary"
-                android:textSize="20sp"
-                tools:text="Введите координаты" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/pre_game__form_body"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/pre_game__form_header"
-            app:layout_constraintBottom_toTopOf="@id/pre_game__form__button_barrier">
-
-            <EditText
-                android:id="@+id/pre_game__form_et_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="96dp"
-                android:minHeight="48dp"
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/pre_game__form_et_3"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/pre_game__form_et_2"
-
-                android:background="@drawable/border_box"
-                android:textAlignment="center"
-                android:inputType="numberDecimal"
-                android:importantForAutofill="no"
-                tools:hint="x1"
-                />
-            <EditText
-                android:id="@+id/pre_game__form_et_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="96dp"
-                android:minHeight="48dp"
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/pre_game__form_et_4"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/pre_game__form_et_1"
-
-                android:background="@drawable/border_box"
-                android:textAlignment="center"
-                android:inputType="numberDecimal"
-                android:importantForAutofill="no"
-                tools:hint="y1"
-                />
-            <EditText
-                android:id="@+id/pre_game__form_et_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="96dp"
-                android:minHeight="48dp"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pre_game__form_et_1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/pre_game__form_et_4"
-
-                android:background="@drawable/border_box"
-                android:textAlignment="center"
-                android:inputType="numberDecimal"
-                android:importantForAutofill="no"
-                tools:hint="x2"
-                />
-            <EditText
-                android:id="@+id/pre_game__form_et_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="96dp"
-                android:minHeight="48dp"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pre_game__form_et_2"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/pre_game__form_et_3"
-
-                android:background="@drawable/border_box"
-                android:textAlignment="center"
-                android:inputType="numberDecimal"
-                android:importantForAutofill="no"
-                tools:hint="y2"
-                />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <Button
-            android:id="@+id/pre_game__form__button_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            app:layout_constraintWidth_percent="0.45"
-            app:layout_constraintWidth_max="320dp"
-            app:layout_constrainedWidth="true"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/pre_game__form__button_2"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            android:layout_margin="10dp"
-            android:textSize="15sp"
-
-            android:backgroundTint="?attr/colorSecondary"
-            tools:text="Удалить"
-            android:text="@string/game"
-            />
-
-        <Button
-            android:id="@+id/pre_game__form__button_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            app:layout_constraintWidth_percent="0.45"
-            app:layout_constraintWidth_max="320dp"
-            app:layout_constrainedWidth="true"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/pre_game__form__button_1"
-            android:layout_margin="10dp"
-            android:textSize="15sp"
-
-            tools:text="Добавить"
-            android:text="@string/game"
-            />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/pre_game__form__button_barrier"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:barrierDirection="top"
-            app:constraint_referenced_ids="pre_game__form__button_1, pre_game__form__button_2"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <TextView
         android:id="@+id/pre_game__header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/pre_game__navigation_bar"
         android:textAlignment="center"
 
         android:textSize="25sp"
-        android:background="?attr/colorPrimaryVariant"
+        android:background="?attr/colorPrimary"
         android:textColor="?attr/colorOnPrimary"
-        android:text="@string/hello_blank_fragment"
-        tools:text="Расстановка кораблей"
+        android:text="@string/preGameHeader"
         />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pre_game__navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pre_game__header"
+        app:layout_constraintBottom_toTopOf="@id/pre_game__form"
+        android:layout_marginVertical="10dp">
+        <Button
+            android:id="@+id/pre_game__back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/backButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_margin="10dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/pre_game__form"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/pre_game__navigation_bar"
+        app:layout_constraintBottom_toTopOf="@id/pre_game__list_header"
+        app:cardCornerRadius="5dp"
+        android:layout_marginHorizontal="10dp"
+        app:cardBackgroundColor="@color/blue_100"
+        app:layout_constraintHeight_min="170dp"
+        app:layout_constraintHeight_percent="0.4"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pre_game__form_body"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/pre_game__form__button_barrier">
+
+                <EditText
+                    android:id="@+id/pre_game__form_et_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="96dp"
+                    android:minHeight="48dp"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/pre_game__form_et_3"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/pre_game__form_et_2"
+
+                    android:background="@drawable/border_box"
+                    android:textAlignment="center"
+                    android:inputType="numberDecimal"
+                    android:importantForAutofill="no"
+                    android:hint="@string/x1Hint"
+                    />
+                <EditText
+                    android:id="@+id/pre_game__form_et_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="96dp"
+                    android:minHeight="48dp"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/pre_game__form_et_4"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/pre_game__form_et_1"
+
+                    android:background="@drawable/border_box"
+                    android:textAlignment="center"
+                    android:inputType="numberDecimal"
+                    android:importantForAutofill="no"
+                    android:hint="@string/y1Hint"
+                    />
+                <EditText
+                    android:id="@+id/pre_game__form_et_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="96dp"
+                    android:minHeight="48dp"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pre_game__form_et_1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/pre_game__form_et_4"
+
+                    android:background="@drawable/border_box"
+                    android:textAlignment="center"
+                    android:inputType="numberDecimal"
+                    android:importantForAutofill="no"
+                    android:hint="@string/x2Hint"
+                    />
+                <EditText
+                    android:id="@+id/pre_game__form_et_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="96dp"
+                    android:minHeight="48dp"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pre_game__form_et_2"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/pre_game__form_et_3"
+
+                    android:background="@drawable/border_box"
+                    android:textAlignment="center"
+                    android:inputType="numberDecimal"
+                    android:importantForAutofill="no"
+                    android:hint="@string/y2Hint"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/pre_game__form__delete_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                app:layout_constraintWidth_percent="0.45"
+                app:layout_constraintWidth_max="320dp"
+                app:layout_constrainedWidth="true"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/pre_game__form__add_button"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                android:layout_margin="10dp"
+                android:textSize="15sp"
+
+                android:backgroundTint="?attr/colorSecondary"
+                android:text="@string/deleteButton"
+                />
+
+            <Button
+                android:id="@+id/pre_game__form__add_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                app:layout_constraintWidth_percent="0.45"
+                app:layout_constraintWidth_max="320dp"
+                app:layout_constrainedWidth="true"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/pre_game__form__delete_button"
+                android:layout_margin="10dp"
+                android:textSize="15sp"
+
+                android:text="@string/addButton"
+                />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/pre_game__form__button_barrier"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:barrierDirection="top"
+                app:constraint_referenced_ids="pre_game__form__delete_button, pre_game__form__add_button"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/pre_game__list_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/pre_game__form"
+        app:layout_constraintBottom_toTopOf="@id/pre_game__list"
         android:textAlignment="center"
-        android:padding="10dp"
+        android:padding="5dp"
         android:textSize="20sp"
-        tools:text="Список кораблей"
-        android:text="@string/hello_blank_fragment">
+        android:text="@string/shipListHeader">
     </TextView>
 
     <FrameLayout
+        android:id="@+id/pre_game__list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/pre_game__list_header"
-        app:layout_constraintBottom_toTopOf="@id/pre_game__confirm_button"
+        app:layout_constraintBottom_toTopOf="@id/pre_game__ready_button"
         android:background="@drawable/horizontal_borders">
-        <view class="androidx.appcompat.app.AlertController$RecycleListView"
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-             android:layout_height="match_parent">
-        </view>
+            android:layout_height="match_parent"
+            tools:listitem="@layout/ship_list_item">
+        </androidx.recyclerview.widget.RecyclerView>
     </FrameLayout>
 
 
     <Button
-        android:id="@+id/pre_game__confirm_button"
+        android:id="@+id/pre_game__ready_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_max="640dp"
-        app:layout_constrainedWidth="true"
 
+        app:layout_constraintTop_toBottomOf="@id/pre_game__list"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="10dp"
         android:textSize="20sp"
-        tools:text="Готово"
-        android:text="@string/hello_blank_fragment"
+        android:text="@string/readyButton"
         />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/pre_game__gl_horizontal_middle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>

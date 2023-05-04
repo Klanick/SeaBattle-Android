@@ -30,9 +30,11 @@ class LoginFragment : Fragment() {
                 .setReorderingAllowed(true)
                 .hide(this)
                 .add(R.id.container, fragment, "menuFragment")
-                .addToBackStack(null)
+                .addToBackStack("LoginToMenu")
                 .commit()
         }
+
+
 
         registrationButton.setOnClickListener {
             val fragment = RegistrationFragment()
@@ -40,7 +42,7 @@ class LoginFragment : Fragment() {
                 .setReorderingAllowed(true)
                 .hide(this)
                 .add(R.id.container, fragment, "registrationFragment")
-                .addToBackStack(null)
+                .addToBackStack("LoginToRegistration")
                 .commit()
         }
     }
