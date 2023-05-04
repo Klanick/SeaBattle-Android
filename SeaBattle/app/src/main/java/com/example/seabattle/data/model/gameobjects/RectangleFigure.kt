@@ -10,20 +10,45 @@ open class RectangleFigure (posX1: Int, posX2: Int,
     protected val posFromY = min(posY1, posY2)
     protected val posToY = max(posY1, posY2)
 
-    private var cells : Set<Cell> = generateCells()
+    private val cells : Set<Cell> = generateCells()
 
     private fun generateCells() : Set<Cell> {
         val res = HashSet<Cell>()
-        for (x in posFromX until posToX + 1) {
-            for (y in posFromY until posToY + 1) {
+        for (x in posFromX .. posToX) {
+            for (y in posFromY .. posToY) {
                 res.add(Cell(x, y))
             }
         }
         return res
     }
 
-    override fun getCells(): Collection<Cell> {
+    override fun getCells(): Set<Cell> {
         return cells
+    }
+
+    override fun include(cell: Cell): Boolean {
+        return cell.posX in posFromX..posToX &&
+                cell.posY in posFromY..posToY
+    }
+
+    override fun includeWhole(figure: Figure): Boolean {
+        if (figure is RectangleFigure) {
+            return posFromX <= figure.posFromX &&  figure.posToX <= posToX &&
+                    posFromY <= figure.posFromY && figure.posToY <= posToY
+        }
+        return super.includeWhole(figure)
+    }
+
+    override fun intersect(figure: Figure): Boolean {
+        if (figure is RectangleFigure) {
+            return (figure.posFromX in posFromX..posToX || figure.posToX in posFromX..posToX) &&
+                    (figure.posFromY in posFromY..posToY || figure.posToY in posFromY..posToY)
+        }
+        return super.intersect(figure)
+    }
+
+    override fun size(): Int {
+        return (posToX - posFromX + 1) * (posToY - posFromY + 1)
     }
 
     override fun equals(other: Any?)
@@ -39,5 +64,9 @@ open class RectangleFigure (posX1: Int, posX2: Int,
         result = 31 * result + posFromY
         result = 31 * result + posToY
         return result
+    }
+
+    override fun toString(): String {
+        return "[RecFigure:(x:$posFromX~$posToX, y:$posFromY~$posToY)]"
     }
 }
