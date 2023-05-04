@@ -2,8 +2,12 @@ package com.example.seabattle
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.seabattle.api.SeaBattleService
 
 class MainActivity : AppCompatActivity() {
+
+    private val seaBattleService: SeaBattleService = SeaBattleService();
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -15,5 +19,9 @@ class MainActivity : AppCompatActivity() {
             .setReorderingAllowed(true)
             .add(R.id.container, fragment, "loginFragment")
             .commit()
+    }
+
+    public fun getService(): SeaBattleService {
+        return seaBattleService;
     }
 }

@@ -1,7 +1,11 @@
 package com.example.seabattleserver.controller;
 
+import com.example.seabattleserver.model.BooleanResponse;
 import com.example.seabattleserver.model.Statistic;
+import com.example.seabattleserver.model.User;
 import com.example.seabattleserver.service.StatisticService;
+import com.example.seabattleserver.service.UserService;
+import jakarta.security.auth.message.AuthException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,18 +22,13 @@ public class StatisticController {
 
     private final StatisticService statisticService;
 
-    @GetMapping("/get/{userId}")
-    public ResponseEntity<Statistic> getStatistic(@PathVariable Long userId) {
-        return ResponseEntity.ok(statisticService.getStatisticForUserId(userId));
+    @GetMapping("/get/{userName}")
+    public ResponseEntity<Statistic> getStatistic(@PathVariable String userName) {
+        return ResponseEntity.ok(statisticService.getStatisticForUser(userName));
     }
 
     @PostMapping("/addStatistic")
-    public ResponseEntity<String> addStatistic(@RequestBody Statistic statistic) {
-        int updatedRows = statisticService.addStatistic(statistic);
-        if (updatedRows != 1) {
-            return ResponseEntity.ok("Failed while trying to add statistic for user with id " +
-                    statistic.getUserId());
-        }
-        return ResponseEntity.ok("Successful update statistic for user with id " + statistic.getUserId());
+    public ResponseEntity<BooleanResponse> addStatistic(@RequestBody Statistic statistic) {
+        return ResponseEntity.ok(BooleanResponse.of(statisticService.addStatistic(statistic)));
     }
 }

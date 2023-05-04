@@ -20,7 +20,7 @@ public class StatisticDao {
 
     private static final String CREATE_STATISTIC = """
             insert into statistic (
-                user_id,
+                username,
                 total_games,
                 total_wins,
                 total_loses,
@@ -38,14 +38,14 @@ public class StatisticDao {
 
     private static final String SELECT_STATISTIC = """
             select
-                user_id,
+                username,
                 total_games,
                 total_wins,
                 total_loses,
                 total_ships_destroyed,
                 total_ships_lost
             from statistic
-            where user_id = ?
+            where username = ?
             """;
 
     private static final String UPDATE_STATISTIC = """
@@ -56,12 +56,12 @@ public class StatisticDao {
                 total_loses = ?,
                 total_ships_destroyed = ?,
                 total_ships_lost = ?
-            where user_id = ?
+            where username = ?
             """;
 
     private static final RowMapper<Statistic> STATISTIC_ROW_MAPPER = (rs, rn) ->
             Statistic.builder()
-                    .userId(rs.getLong("user_id"))
+                    .username(rs.getString("username"))
                     .totalGames(rs.getLong("total_games"))
                     .totalWins(rs.getLong("total_wins"))
                     .totalLoses(rs.getLong("total_loses"))
@@ -69,25 +69,25 @@ public class StatisticDao {
                     .totalShipsLost(rs.getLong("total_ships_lost"))
                     .build();
 
-    private void createStatistic(@NonNull Long userId) {
-        jdbcTemplate.update(CREATE_STATISTIC, userId);
+    private void createStatistic(@NonNull String userName) {
+        jdbcTemplate.update(CREATE_STATISTIC, userName);
     }
 
-    public Optional<Statistic> getStatisticForUserId(@NonNull Long userId) {
+    public Optional<Statistic> getStatisticForUserName(@NonNull String userName) {
         return ofNullable(DataAccessUtils.singleResult(
-                jdbcTemplate.query(SELECT_STATISTIC, STATISTIC_ROW_MAPPER, userId)));
+                jdbcTemplate.query(SELECT_STATISTIC, STATISTIC_ROW_MAPPER, userName)));
     }
 
     public int addStatistic(@NonNull Statistic statistic) {
-        Optional<Statistic> oldStatOpt = getStatisticForUserId(statistic.getUserId());
+        Optional<Statistic> oldStatOpt = getStatisticForUserName(statistic.getUsername());
 
         if (oldStatOpt.isEmpty()) {
-            createStatistic(statistic.getUserId());
-            oldStatOpt = getStatisticForUserId(statistic.getUserId());
+            createStatistic(statistic.getUsername());
+            oldStatOpt = getStatisticForUserName(statistic.getUsername());
         }
 
         if (oldStatOpt.isEmpty()) {
-            throw new IllegalStateException("Can't update settings for user with id " + statistic.getUserId());
+            throw new IllegalStateException("Can't update settings for user " + statistic.getUsername());
         }
 
         Statistic oldStat = oldStatOpt.get();
@@ -98,7 +98,7 @@ public class StatisticDao {
                 oldStat.getTotalLoses() + statistic.getTotalLoses(),
                 oldStat.getTotalShipsDestroyed() + statistic.getTotalShipsDestroyed(),
                 oldStat.getTotalShipsLost() + statistic.getTotalShipsLost(),
-                statistic.getUserId()
+                statistic.getUsername()
                 );
     }
 }

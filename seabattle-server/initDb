@@ -1,7 +1,15 @@
-create table statistic (
-    user_id bigint,
-    total_games bigint,
-    total_wins bigint,
-    total_loses bigint,
+create table statistic
+(
+    username              varchar unique,
+    total_games           bigint,
+    total_wins            bigint,
+    total_loses           bigint,
     total_ships_destroyed bigint,
-    total_ships_lost bigint);
+    total_ships_lost      bigint
+);
+
+create table users
+(
+    username varchar unique,
+    password varchar
+);

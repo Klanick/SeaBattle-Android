@@ -1,5 +1,6 @@
 package com.example.seabattleserver.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +14,10 @@ import org.springframework.lang.NonNull;
 public class User {
 
     @NonNull
-    Long id;
-
-    @NonNull
+    @JsonProperty
     String username;
 
     @NonNull
+    @JsonProperty
     String password;
 }

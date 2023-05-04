@@ -11,12 +11,16 @@ public class StatisticService {
 
     private final StatisticDao statisticDao;
 
-    public Statistic getStatisticForUserId(Long userId) {
-        return statisticDao.getStatisticForUserId(userId)
-                .orElse(Statistic.builder().userId(userId).build());
+    public Statistic getStatisticForUser(String userName) {
+        return statisticDao.getStatisticForUserName(userName)
+                .orElse(Statistic.builder().username(userName).build());
     }
 
-    public int addStatistic(Statistic statistic) {
-        return statisticDao.addStatistic(statistic);
+    public boolean addStatistic(Statistic statistic) {
+        int result = statisticDao.addStatistic(statistic);
+        if (result != 1) {
+            throw new IllegalStateException("Can't update statistic for " + statistic.getUsername());
+        }
+        return true;
     }
 }

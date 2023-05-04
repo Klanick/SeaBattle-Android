@@ -15,7 +15,7 @@ public class Statistic {
 
     @NonNull
     @JsonProperty
-    private final Long userId;
+    private final String username;
 
     @NonNull
     @Builder.Default
