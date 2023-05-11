@@ -1,9 +1,9 @@
 package com.example.seabattle.data.model.gameobjects
 
-import com.example.seabattle.data.model.gameobjects.ShipCollectionBuilder.ShipSetBuilderException
+import com.example.seabattle.data.model.gameobjects.ShipPackBuilder.ShipSetBuilderException
 import kotlin.random.Random
 
-class StandardShipCollectionBuilder(private val board: Figure) : ShipCollectionBuilder {
+open class StandardShipPackBuilder(private val board: Figure) : ShipPackBuilder<List<Ship>> {
     private val shipSet : MutableSet<Ship> = HashSet()
     override fun tryAdd(ship: Ship) {
         if (shipSet.contains(ship)) {
@@ -33,14 +33,14 @@ class StandardShipCollectionBuilder(private val board: Figure) : ShipCollectionB
         shipSet.clear()
     }
 
-    override fun tryBuild(): Collection<Ship> {
+    override fun tryBuild(): List<Ship> {
         tryCheckRulesForBuild()
         return build()
     }
 
-    override fun build(): Collection<Ship> {
+    private fun build(): List<Ship> {
         println("Successfully build : {\n" +  shipSet.joinToString("\n") + "\n}")
-        return shipSet
+        return shipSet.toList()
     }
 
     private val shipTypes : List<ShipType> = listOf(LinearType(4), LinearType(3), LinearType(2), LinearType(1))
@@ -50,7 +50,7 @@ class StandardShipCollectionBuilder(private val board: Figure) : ShipCollectionB
         val expectSize = shipTypesExpectCounts.sum()
         val curSize = shipSet.size
         if (curSize != expectSize) {
-            throw ShipSetBuilderException("Expected $expectSize count ships, found $curSize")
+            throw ShipSetBuilderException("@string/game")
         }
 
         for(typeI in shipTypes.indices) {
@@ -104,7 +104,7 @@ class StandardShipCollectionBuilder(private val board: Figure) : ShipCollectionB
         }
     }
 
-    override fun tryAddRandom() {
+    private fun tryAddRandom() {
         for (typeI in shipTypes.indices) {
             val type = shipTypes[typeI]
             val expectTypeCount = shipTypesExpectCounts[typeI]
@@ -130,7 +130,7 @@ class StandardShipCollectionBuilder(private val board: Figure) : ShipCollectionB
         throw ShipSetBuilderException("Can't add ship to full collection")
     }
 
-    override fun tryCompleteRandom() {
+    override fun tryComplete() {
         while (shipSet.size < shipTypesExpectCounts.sum()) {
             tryAddRandom()
         }
