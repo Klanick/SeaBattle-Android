@@ -1,23 +1,18 @@
 package com.example.seabattle.data.model.gameobjects
 
-interface ShipCollectionBuilder {
+interface ShipPackBuilder <ShipPack> {
     @Throws(ShipSetBuilderException::class)
     fun tryAdd(ship: Ship)
 
     @Throws(ShipSetBuilderException::class)
-    fun tryAddRandom()
-
-    @Throws(ShipSetBuilderException::class)
-    fun tryCompleteRandom()
+    fun tryComplete()
 
     @Throws(ShipSetBuilderException::class)
     fun tryDelete(ship: Ship)
     fun clear()
 
     @Throws(ShipSetBuilderException::class)
-    fun tryBuild() : Collection<Ship>
-
-    fun build() : Collection<Ship>
+    fun tryBuild() : ShipPack
 
     class ShipSetBuilderException(message:String): Exception(message)
 }

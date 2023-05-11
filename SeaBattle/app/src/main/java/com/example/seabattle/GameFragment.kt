@@ -13,8 +13,7 @@ import com.example.seabattle.data.model.gameobjects.Cell
 import com.example.seabattle.data.model.gameobjects.Ship
 import com.example.seabattle.databinding.FragmentGameBinding
 
-private const val ARG_SHIPS = "ships"
-
+private const val ARG_GAME_START_PACK = "gameStartPack"
 /**
  * A simple [Fragment] subclass.
  * Use the [GameFragment.newInstance] factory method to
@@ -23,14 +22,14 @@ private const val ARG_SHIPS = "ships"
 class GameFragment : Fragment() {
     private var _binding: FragmentGameBinding? = null
     private val binding get() = _binding!!
-    private var ships: List<Ship>? = null
+    private lateinit var gameStartPack: PreGameViewModel.GameStartPack
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         arguments?.let {
-            // TODO replace from deprecated
-            ships = it.getParcelableArrayList(ARG_SHIPS)
+            @Suppress("DEPRECATION")
+            gameStartPack = it.getParcelable(ARG_GAME_START_PACK)!!
         }
     }
 
