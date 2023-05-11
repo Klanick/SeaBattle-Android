@@ -11,54 +11,69 @@
         android:id="@+id/shipsLostCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:text="@string/ship_failed_count"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
-        app:layout_constraintStart_toEndOf="@+id/textShipsLost"
-        app:layout_constraintTop_toBottomOf="@+id/shipsDestroyedCount"
-        app:layout_constraintVertical_bias="0.117" />
-
-    <TextView
-        android:id="@+id/textShipsLost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ship_failed"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textShipsDestroyed"
-        app:layout_constraintVertical_bias="0.115" />
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/profile_exit"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/shipsDestroyedCount" />
 
     <TextView
         android:id="@+id/shipsDestroyedCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ship_killed_count"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.843"
-        app:layout_constraintStart_toEndOf="@+id/textShipsDestroyed"
-        app:layout_constraintTop_toBottomOf="@+id/defeatsCount"
-        app:layout_constraintVertical_bias="0.098" />
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/shipsLostCount"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/defeatsCount" />
+
+    <TextView
+        android:id="@+id/defeatsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faIL_count"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/shipsDestroyedCount"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/victoriesCount" />
+
+    <TextView
+        android:id="@+id/victoriesCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/victory_count"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/defeatsCount"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/Nickname" />
+
+    <TextView
+        android:id="@+id/textShipsLost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/profile_exit"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textShipsDestroyed"
+        tools:background="@color/blue_500"
+        tools:text="@string/ship_failed"
+        tools:textColor="@color/white"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/textShipsDestroyed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/blue_500"
         android:text="@string/ship_killed"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/textShipsLost"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/textDefeats"
-        app:layout_constraintVertical_bias="0.098" />
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/Nickname"
@@ -66,74 +81,84 @@
         android:layout_height="wrap_content"
         android:text="@string/profile_name"
         android:textAlignment="center"
+        android:textColor="@color/blue_500"
         android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
         android:id="@+id/textVictories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:background="?attr/colorPrimary"
         android:text="@string/Victory"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/textDefeats"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/Nickname"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/victoriesCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="35dp"
-        android:text="@string/victory_count"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textVictories"
-        app:layout_constraintTop_toBottomOf="@+id/Nickname"
-        app:layout_constraintVertical_bias="0.0" />
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/textDefeats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:background="?attr/colorPrimary"
         android:text="@string/Fail"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textVictories" />
-
-    <TextView
-        android:id="@+id/defeatsCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/faIL_count"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.898"
-        app:layout_constraintStart_toEndOf="@+id/textDefeats"
-        app:layout_constraintTop_toBottomOf="@+id/victoriesCount"
-        app:layout_constraintVertical_bias="0.079" />
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/textShipsDestroyed"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textVictories"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/profile_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="73dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/backButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textShipsLost"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        tools:layout_editor_absoluteX="411dp"
+        tools:layout_editor_absoluteY="161dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="10dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="10dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="35dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

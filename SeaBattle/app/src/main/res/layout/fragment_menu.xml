@@ -55,7 +55,7 @@
         android:layout_height="0dp"
         app:barrierDirection="left"
         app:constraint_referenced_ids="profile_button, game_button, exit_button"
-        />
+        tools:layout_editor_absoluteX="103dp" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/menu__button_barrier_right"
@@ -63,6 +63,6 @@
         android:layout_height="0dp"
         app:barrierDirection="right"
         app:constraint_referenced_ids="profile_button, game_button, exit_button"
-        />
+        tools:layout_editor_absoluteX="309dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

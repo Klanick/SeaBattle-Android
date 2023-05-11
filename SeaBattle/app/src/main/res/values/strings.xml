@@ -35,4 +35,5 @@
     <string name="victory_count">10000000</string>
     <string name="Fail">Поражений</string>
     <string name="faIL_count">200000</string>
+    <string name="change_language">сменить язык</string>
 </resources>
