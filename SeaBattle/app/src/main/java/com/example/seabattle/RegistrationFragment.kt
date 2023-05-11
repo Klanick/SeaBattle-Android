@@ -25,6 +25,36 @@ class RegistrationFragment : Fragment() {
         val loginButton = binding.registration
 
         loginButton.setOnClickListener {
+            // Вот этот код корректно отрабатывает, надо только придумать каклучше доставать service,
+//            потому что сейчас он кажется создает новый экзепляр MainActivity
+//            val username = requireActivity().findViewById<EditText>(R.id.editTextTextPersonName)
+//
+//            val password = requireActivity().findViewById<EditText>(R.id.editTextTextPassword)
+//
+//            MainActivity().getService().getApi().register(UserDto(username.text.toString(),
+//                password.text.toString()))
+//                .enqueue(object : Callback<BooleanResponse> {
+//                    override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
+//                        System.err.println(t.message)
+//                    }
+//
+//                    override fun onResponse(
+//                        call: Call<BooleanResponse>,
+//                        response: Response<BooleanResponse>
+//                    ) {
+//                        println(response.body())
+//                    }
+//                });
+
+
+            val fragment = LoginFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .setReorderingAllowed(true)
+                .hide(this)
+                .add(R.id.container, fragment, "loginFragment")
+                .addToBackStack(null)
+                .commit()
+
             requireActivity().supportFragmentManager.popBackStack(
                 "LoginToRegistration",
                 FragmentManager.POP_BACK_STACK_INCLUSIVE)
