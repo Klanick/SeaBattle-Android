@@ -95,7 +95,7 @@ class LoginFragment : Fragment() {
                 .setReorderingAllowed(true)
                 .remove(this)
                 .add(R.id.container, fragment, "registrationFragment")
-                .addToBackStack(null)
+                .addToBackStack("LoginToRegistration")
                 .commit()
         }
     }

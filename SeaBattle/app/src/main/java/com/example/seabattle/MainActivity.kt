@@ -13,10 +13,12 @@ class MainActivity : AppCompatActivity() {
         fragment.arguments = Bundle().apply {
             //todo put data
         }
-        supportFragmentManager.beginTransaction()
-            .setReorderingAllowed(true)
-            .add(R.id.container, fragment, "loginFragment")
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .setReorderingAllowed(true)
+                .add(R.id.container, fragment, "loginFragment")
+                .commit()
+        }
     }
 
 }
