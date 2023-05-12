@@ -19,9 +19,9 @@ public class StatisticController {
 
     private final StatisticService statisticService;
 
-    @GetMapping("/get/{userName}")
-    public ResponseEntity<Statistic> getStatistic(@PathVariable String userName) {
-        return ResponseEntity.ok(statisticService.getStatisticForUser(userName));
+    @GetMapping("/get/{username}")
+    public ResponseEntity<Statistic> getStatistic(@PathVariable String username) {
+        return ResponseEntity.ok(statisticService.getStatisticForUser(username));
     }
 
     @PostMapping("/addStatistic")

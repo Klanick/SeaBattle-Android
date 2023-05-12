@@ -1,5 +1,7 @@
 package com.example.seabattle
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -12,6 +14,7 @@ import com.example.seabattle.api.SeaBattleService
 import com.example.seabattle.api.model.BooleanResponse
 import com.example.seabattle.api.model.UserDto
 import com.example.seabattle.databinding.FragmentLoginBinding
+import kotlinx.coroutines.currentCoroutineContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +22,7 @@ import retrofit2.Response
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    private var sPreferences: SharedPreferences? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,19 +39,19 @@ class LoginFragment : Fragment() {
 
         loginButton.setOnClickListener {
 
-            val username = requireActivity().findViewById<EditText>(R.id.editLoginLogin)
+            val username = requireActivity().findViewById<EditText>(R.id.editLoginLogin).text.toString()
 
-            val password = requireActivity().findViewById<EditText>(R.id.editPasswordLogin)
+            val password = requireActivity().findViewById<EditText>(R.id.editPasswordLogin).text.toString()
 
             var message = ""
             var isSuccess: Boolean
 
-            System.err.println(username.text.toString() + ":" + password.text.toString())
+            sPreferences = context?.getSharedPreferences("ref", MODE_PRIVATE)
 
             SeaBattleService().getApi().login(
                 UserDto(
-                    username.text.toString(),
-                    password.text.toString()
+                    username,
+                    password
                 )
             )
                 .enqueue(object : Callback<BooleanResponse> {
@@ -69,6 +73,9 @@ class LoginFragment : Fragment() {
                         isSuccess = response.isSuccessful
                         val body = response.body()!!
                         if (isSuccess && body.getMessage() == "") {
+                            sPreferences!!.edit().putString(R.string.currentUsername.toString(),
+                                username)?.apply()
+                            System.err.println(sPreferences?.getString(R.string.currentUsername.toString(), ""))
                             val fragment = MenuFragment()
                             requireActivity().supportFragmentManager.beginTransaction()
                                 .setReorderingAllowed(true)

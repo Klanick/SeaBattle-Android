@@ -27,13 +27,15 @@
     <string name="miss">O</string>
     <string name="profileName">ПРОФИЛЬ</string>
     <string name="exit">ВЫЙТИ</string>
-    <string name="ship_failed_count">200000</string>
+    <string name="ship_failed_count">0</string>
     <string name="ship_failed">Кораблей потеряно</string>
-    <string name="ship_killed_count">200000</string>
+    <string name="ship_killed_count">0</string>
     <string name="ship_killed">Кораблей убито</string>
     <string name="profile_name">Nickname</string>
     <string name="Victory">Побед</string>
-    <string name="victory_count">10000000</string>
+    <string name="victory_count">0</string>
     <string name="Fail">Поражений</string>
-    <string name="faIL_count">200000</string>
+    <string name="faIL_count">0</string>
+
+    <string name="currentUsername">currentUsername</string>
 </resources>
