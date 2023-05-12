@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editLoginLogin"
         android:layout_width="245dp"
         android:layout_height="60dp"
         android:ems="10"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.232" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/editPasswordLogin"
         android:layout_width="245dp"
         android:layout_height="60dp"
         android:ems="10"
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/editLoginLogin"
         app:layout_constraintVertical_bias="0.083" />
 
     <Button
@@ -42,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordLogin"
         app:layout_constraintVertical_bias="0.203" />
 
     <Button
@@ -56,4 +56,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login"
         app:layout_constraintVertical_bias="0.322" />
+
+    <TextView
+        android:id="@+id/errorMessageLogin"
+        android:layout_width="352dp"
+        android:layout_height="26dp"
+        android:textColor="#D60B0B"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordLogin"
+        app:layout_constraintVertical_bias="0.291" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

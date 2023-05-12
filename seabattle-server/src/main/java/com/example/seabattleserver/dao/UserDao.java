@@ -53,6 +53,9 @@ public class UserDao {
         if (userInDb.isEmpty()) {
             throw new AuthException("No user registered with login " + user.getUsername());
         }
-        return userInDb.get().getPassword().equals(user.getPassword());
+        if (userInDb.get().getPassword().equals(user.getPassword())) {
+            return true;
+        }
+        throw new AuthException("Wrong password for user " + user.getUsername());
     }
 }
