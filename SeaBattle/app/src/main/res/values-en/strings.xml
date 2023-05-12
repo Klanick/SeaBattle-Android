@@ -32,4 +32,6 @@
     <string name="faIL_count">200000</string>
     <string name="change_language">Change language</string>
     <string name="SkipButton">Skip</string>
+    <string name="Clear">Clear</string>
+    <string name="Auto">Auto</string>
 </resources>

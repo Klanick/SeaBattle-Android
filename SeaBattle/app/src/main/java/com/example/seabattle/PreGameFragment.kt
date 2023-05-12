@@ -51,15 +51,13 @@ class PreGameFragment : Fragment() {
 
                     binding.preGameFormAddButton.setOnClickListener {
                         try {
-                            /** Temporary usage tryAddRandom instead of tryAdd :: For Testing */
-                            state.tryComplete()
-                            /*shipSetBuilder?.tryAdd(
+                            state.tryAdd(
                                 RectangleShip(
                                     binding.preGameFormEt1.text.toString().toInt(),
                                     binding.preGameFormEt3.text.toString().toInt(),
                                     binding.preGameFormEt2.text.toString().toInt(),
                                     binding.preGameFormEt4.text.toString().toInt())
-                            )*/
+                            )
                         } catch (e: ShipPackBuilder.ShipSetBuilderException) {
                             println(e.localizedMessage)
                         } catch (e: NumberFormatException) {
@@ -67,22 +65,32 @@ class PreGameFragment : Fragment() {
                         }
                     }
 
+                    binding.preGameAutoButton.setOnClickListener {
+                        try {
+                            state.tryComplete()
+                        } catch (e: ShipPackBuilder.ShipSetBuilderException) {
+                            println(e.localizedMessage)
+                        }
+                    }
+
                     binding.preGameFormDeleteButton.setOnClickListener {
                         try {
-                            /** Temporary usage clear instead of tryDelete :: For Testing */
-                            state.clear()
-                            /*shipSetBuilder?.tryDelete(
+                            state.tryDelete(
                                 RectangleShip(
                                     binding.preGameFormEt1.text.toString().toInt(),
                                     binding.preGameFormEt3.text.toString().toInt(),
                                     binding.preGameFormEt2.text.toString().toInt(),
                                     binding.preGameFormEt4.text.toString().toInt())
-                            )*/
+                            )
                         } catch (e: ShipPackBuilder.ShipSetBuilderException) {
                             println(e.localizedMessage)
                         } catch (e: NumberFormatException) {
                             println("Not Number")
                         }
+                    }
+
+                    binding.preGameClearButton.setOnClickListener {
+                        state.clear()
                     }
                     val gameButton = binding.preGameReadyButton
 

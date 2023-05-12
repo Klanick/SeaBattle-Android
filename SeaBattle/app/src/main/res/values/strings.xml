@@ -38,4 +38,6 @@
     <string name="faIL_count">200000</string>
     <string name="change_language">сменить язык</string>
     <string name="SkipButton">Пропустить</string>
+    <string name="Clear">Очистить</string>
+    <string name="Auto">Авто</string>
 </resources>
