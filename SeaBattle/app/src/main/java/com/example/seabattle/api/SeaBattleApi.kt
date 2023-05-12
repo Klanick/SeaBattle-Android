@@ -17,7 +17,7 @@ interface SeaBattleApi {
     @POST("/users/login")
     fun login(@Body userDto: UserDto): Call<BooleanResponse>
 
-    @GET("/statistic/get/{userName}")
+    @GET("/statistic/get/{username}")
     fun getStatistic(@Path("username") username: String): Call<StatisticDto>
 
     @POST("/statistic/addStatistic")
