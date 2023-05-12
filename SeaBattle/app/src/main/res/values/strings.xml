@@ -6,10 +6,10 @@
 
     <string name="preGameHeader">Расположение кораблей</string>
     <string name="inputCoordinatesHeader">Введите координаты</string>
-    <string name="x1Hint">x1</string>
-    <string name="x2Hint">x2</string>
-    <string name="y1Hint">y1</string>
-    <string name="y2Hint">y2</string>
+    <string name="x1Hint" translatable="false">x1</string>
+    <string name="x2Hint" translatable="false">x2</string>
+    <string name="y1Hint" translatable="false">y1</string>
+    <string name="y2Hint" translatable="false">y2</string>
     <string name="addButton">Добавить</string>
     <string name="deleteButton">Удалить</string>
     <string name="shipListHeader">Список кораблей</string>
@@ -18,8 +18,8 @@
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="localhostAddress">192.168.0.36:8080</string>
-    <string name="unexpectedError">Unexpected Error</string>
+    <string name="localhostAddress" translatable="false">192.168.0.36:8080</string>
+    <string name="unexpectedError" translatable="false">Unexpected Error</string>
     <string name="app_name">Морской Бой</string>
     <string name="game">Игра</string>
     <string name="quit">Выход</string>
@@ -37,4 +37,5 @@
     <string name="Fail">Поражений</string>
     <string name="faIL_count">200000</string>
     <string name="change_language">сменить язык</string>
+    <string name="SkipButton">Пропустить</string>
 </resources>
