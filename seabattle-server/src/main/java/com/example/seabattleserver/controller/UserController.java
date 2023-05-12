@@ -20,15 +20,25 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<BooleanResponse> registerUser(@RequestBody User user) {
-        return ResponseEntity.ok(BooleanResponse.of(userService.registerUser(user)));
+        try {
+            if (userService.registerUser(user)) {
+                return ResponseEntity.ok(BooleanResponse.of(true));
+            }
+            return ResponseEntity.ok(BooleanResponse.error("Unexpected error"));
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            return ResponseEntity.ok(BooleanResponse.error(e.getMessage()));
+        }
     }
 
     @PostMapping("/login")
     public ResponseEntity<BooleanResponse> login(@RequestBody User user) {
         try {
-            return ResponseEntity.ok(BooleanResponse.of(userService.login(user)));
+            if (userService.login(user)) {
+                return ResponseEntity.ok(BooleanResponse.of(true));
+            }
+            return ResponseEntity.ok(BooleanResponse.error("Unexpected error"));
         } catch (AuthException e) {
-            return ResponseEntity.ok(BooleanResponse.of(false));
+            return ResponseEntity.ok(BooleanResponse.error(e.getMessage()));
         }
     }
 }

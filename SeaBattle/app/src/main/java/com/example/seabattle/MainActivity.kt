@@ -6,8 +6,6 @@ import com.example.seabattle.api.SeaBattleService
 
 class MainActivity : AppCompatActivity() {
 
-    private val seaBattleService: SeaBattleService = SeaBattleService();
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,7 +21,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getService(): SeaBattleService {
-        return seaBattleService;
-    }
 }
