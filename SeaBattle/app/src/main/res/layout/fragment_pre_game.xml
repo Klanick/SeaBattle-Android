@@ -6,37 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".PreGameFragment">
 
-    <TextView
-        android:id="@+id/pre_game__header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/pre_game__navigation_bar"
-        android:textAlignment="center"
-
-        android:textSize="25sp"
-        android:background="?attr/colorPrimary"
-        android:textColor="?attr/colorOnPrimary"
-        android:text="@string/preGameHeader"
-        />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pre_game__navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/pre_game__header"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/pre_game__form"
-        android:layout_marginVertical="10dp">
+        android:layout_marginVertical="5dp">
         <Button
             android:id="@+id/pre_game__back_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/backButton"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintHorizontal_bias="0"
-            android:layout_margin="10dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="10dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
@@ -48,18 +31,47 @@
         app:cardCornerRadius="5dp"
         android:layout_marginHorizontal="10dp"
         app:cardBackgroundColor="@color/blue_100"
-        app:layout_constraintHeight_min="170dp"
-        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHeight_percent="0.45"
+        app:layout_constraintHeight_min="200dp"
         >
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/pre_game__clear_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Clear"
+                android:backgroundTint="?attr/colorSecondary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="5dp"/>
+
+            <Button
+                android:id="@+id/pre_game__auto_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Auto"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="5dp"/>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/pre_game__form__top_button_barrier"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="pre_game__clear_button, pre_game__auto_button"
+                />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pre_game__form_body"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pre_game__form__top_button_barrier"
                 app:layout_constraintBottom_toTopOf="@id/pre_game__form__button_barrier">
 
                 <EditText
@@ -142,7 +154,6 @@
                 android:id="@+id/pre_game__form__delete_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
                 app:layout_constraintWidth_percent="0.45"
                 app:layout_constraintWidth_max="320dp"
                 app:layout_constrainedWidth="true"
@@ -151,7 +162,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/pre_game__form__add_button"
                 app:layout_constraintHorizontal_chainStyle="spread"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:textSize="15sp"
 
                 android:backgroundTint="?attr/colorSecondary"
@@ -162,7 +173,6 @@
                 android:id="@+id/pre_game__form__add_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
                 app:layout_constraintWidth_percent="0.45"
                 app:layout_constraintWidth_max="320dp"
                 app:layout_constrainedWidth="true"
@@ -170,7 +180,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/pre_game__form__delete_button"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:textSize="15sp"
 
                 android:text="@string/addButton"
@@ -206,6 +216,7 @@
         app:layout_constraintBottom_toTopOf="@id/pre_game__ready_button"
         android:background="@drawable/horizontal_borders">
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pre_game__list__container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/ship_list_item">
@@ -217,15 +228,14 @@
         android:id="@+id/pre_game__ready_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_max="640dp"
 
         app:layout_constraintTop_toBottomOf="@id/pre_game__list"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="10dp"
-        android:textSize="20sp"
+        android:layout_margin="5dp"
+        android:textSize="15sp"
         android:text="@string/readyButton"
         />
 

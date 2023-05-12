@@ -2,70 +2,91 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editLoginLogin"
-        android:layout_width="245dp"
-        android:layout_height="60dp"
-        android:ems="10"
-        android:hint="@string/loginHint"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginVertical="10dp"
+        android:id="@+id/user_form"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.232" />
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar"
+        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintWidth_max="400dp"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHeight_min="200dp"
+        app:layout_constraintVertical_chainStyle="spread"
+        >
 
-    <EditText
-        android:id="@+id/editPasswordLogin"
-        android:layout_width="245dp"
-        android:layout_height="60dp"
-        android:ems="10"
-        android:hint="@string/passwordHint"
-        android:inputType="textPassword"
+        <FrameLayout
+            android:id="@+id/user_form__body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/user_form_button"
+            app:layout_constraintVertical_chainStyle="spread">
+            <include layout="@layout/user_fom"
+                android:id="@+id/user_form_include"/>
+        </FrameLayout>
+
+
+        <Button
+            android:id="@+id/user_form_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/loginButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_form__body"
+            android:layout_marginBottom="40dp"
+            />
+
+        <TextView
+            android:id="@+id/user_form__error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_a400"
+            app:layout_constraintTop_toBottomOf="@id/user_form_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAlignment="center" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/navigation_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintWidth_max="250dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_form"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editLoginLogin"
-        app:layout_constraintVertical_bias="0.083" />
+        android:layout_marginVertical="10dp">
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="264dp"
-        android:layout_height="78dp"
-        android:text="@string/loginButton"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPasswordLogin"
-        app:layout_constraintVertical_bias="0.203" />
+        <Button
+            android:id="@+id/registration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registrationButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/skip_button"
+            app:layout_constraintVertical_chainStyle="spread"
+            android:layout_marginVertical="5dp"
+            />
 
-    <Button
-        android:id="@+id/registration"
-        android:layout_width="280dp"
-        android:layout_height="59dp"
-        android:text="@string/registrationButton"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
-        app:layout_constraintVertical_bias="0.322" />
-
-    <TextView
-        android:id="@+id/errorMessageLogin"
-        android:layout_width="352dp"
-        android:layout_height="26dp"
-        android:textColor="#D60B0B"
-        app:layout_constraintBottom_toTopOf="@+id/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPasswordLogin"
-        app:layout_constraintVertical_bias="0.291" />
-
+        <Button
+            android:id="@+id/skip_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/SkipButton"
+            app:layout_constraintTop_toBottomOf="@id/registration"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginVertical="5dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

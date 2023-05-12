@@ -5,9 +5,8 @@ import android.text.TextUtils.isEmpty
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.seabattle.api.SeaBattleService
 import com.example.seabattle.api.model.BooleanResponse
 import com.example.seabattle.api.model.UserDto
@@ -30,13 +29,12 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val loginButton = binding.registration
+        val loginButton = binding.userFormButton
+        val errorMessage = binding.userFormErrorMessage
 
         loginButton.setOnClickListener {
-
-            val username = requireActivity().findViewById<EditText>(R.id.editLoginRegistration)
-
-            val password = requireActivity().findViewById<EditText>(R.id.editPasswordRegistration)
+            val username = binding.userFormInclude.editTextTextPersonName
+            val password = binding.userFormInclude.editTextTextPassword
 
             var message = ""
             var isSuccess: Boolean
@@ -50,8 +48,6 @@ class RegistrationFragment : Fragment() {
                 .enqueue(object : Callback<BooleanResponse> {
                     override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
                         message = t.message.orEmpty()
-                        val errorMessage =
-                            requireActivity().findViewById<TextView>(R.id.errorMessageRegistration)
                         if (isEmpty(message)) {
                             errorMessage.setText(R.string.unexpectedError)
                         } else {
@@ -66,16 +62,8 @@ class RegistrationFragment : Fragment() {
                         isSuccess = response.isSuccessful
                         val body = response.body()!!
                         if (isSuccess && body.getMessage() == "") {
-                            val fragment = LoginFragment()
-                            requireActivity().supportFragmentManager.beginTransaction()
-                                .setReorderingAllowed(true)
-                                .remove(this@RegistrationFragment)
-                                .add(R.id.container, fragment, "loginFragment")
-                                .addToBackStack(null)
-                                .commit()
+                            backTransaction()
                         } else {
-                            val errorMessage = requireActivity()
-                                .findViewById<TextView>(R.id.errorMessageRegistration)
                             if (isEmpty(message)) {
                                 errorMessage.text = body.getMessage()
                             } else {
@@ -85,5 +73,15 @@ class RegistrationFragment : Fragment() {
                     }
                 })
         }
+
+        binding.backButton.setOnClickListener {
+            backTransaction()
+        }
+    }
+
+    private fun backTransaction() {
+        requireActivity().supportFragmentManager.popBackStack(
+            "LoginToRegistration",
+            FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 }

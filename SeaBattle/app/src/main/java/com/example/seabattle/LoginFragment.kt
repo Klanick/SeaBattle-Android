@@ -7,8 +7,6 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.seabattle.api.SeaBattleService
 import com.example.seabattle.api.model.BooleanResponse
@@ -34,8 +32,9 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val loginButton = binding.login
+        val loginButton = binding.userFormButton
         val registrationButton = binding.registration
+        val errorMessage = binding.userFormErrorMessage
 
         loginButton.setOnClickListener {
 
@@ -57,8 +56,6 @@ class LoginFragment : Fragment() {
                 .enqueue(object : Callback<BooleanResponse> {
                     override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
                         message = t.message.orEmpty()
-                        val errorMessage = requireActivity()
-                            .findViewById<TextView>(R.id.errorMessageLogin)
                         if (TextUtils.isEmpty(message)) {
                             errorMessage.setText(R.string.unexpectedError)
                         } else {
@@ -75,17 +72,8 @@ class LoginFragment : Fragment() {
                         if (isSuccess && body.getMessage() == "") {
                             sPreferences!!.edit().putString(R.string.currentUsername.toString(),
                                 username)?.apply()
-                            System.err.println(sPreferences?.getString(R.string.currentUsername.toString(), ""))
-                            val fragment = MenuFragment()
-                            requireActivity().supportFragmentManager.beginTransaction()
-                                .setReorderingAllowed(true)
-                                .remove(this@LoginFragment)
-                                .add(R.id.container, fragment, "menuFragment")
-                                .addToBackStack(null)
-                                .commit()
+                            toMenuTransaction()
                         } else {
-                            val errorMessage =
-                                requireActivity().findViewById<TextView>(R.id.errorMessageLogin)
                             if (TextUtils.isEmpty(message)) {
                                 errorMessage.text = body.getMessage()
                             } else {
@@ -101,9 +89,22 @@ class LoginFragment : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .remove(this)
-                .add(R.id.container, fragment, "registrationFragment")
+                .replace(R.id.container, fragment, "registrationFragment")
                 .addToBackStack("LoginToRegistration")
                 .commit()
         }
+
+        binding.skipButton.setOnClickListener {
+            toMenuTransaction()
+        }
+    }
+
+    private fun toMenuTransaction() {
+        val fragment = MenuFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .setReorderingAllowed(true)
+            .replace(R.id.container, fragment, "menuFragment")
+            .addToBackStack("LoginToMenu")
+            .commit()
     }
 }

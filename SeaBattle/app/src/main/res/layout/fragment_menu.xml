@@ -34,13 +34,14 @@
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintWidth_percent="0.5" />
+        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintWidth_max="400dp" />
 
     <Button
         android:id="@+id/exit_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/exit"
+        android:text="@string/loginButton"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/game_button"
         app:layout_constraintBottom_toBottomOf="parent"
