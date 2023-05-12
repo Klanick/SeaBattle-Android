@@ -32,10 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/backButton"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="10dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
