@@ -1,5 +1,7 @@
 package com.example.seabattle
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import retrofit2.Response
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    private var sPreferences: SharedPreferences? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,20 +36,21 @@ class LoginFragment : Fragment() {
         val errorMessage = binding.userFormErrorMessage
 
         loginButton.setOnClickListener {
-            val username = binding.userFormInclude.editTextTextPersonName
-            val password = binding.userFormInclude.editTextTextPassword
+
+            val username = binding.userFormInclude.editTextTextPersonName.text.toString()
+            val password = binding.userFormInclude.editTextTextPassword.text.toString()
 
             var message = ""
             var isSuccess: Boolean
 
-            System.err.println(username.text.toString() + ":" + password.text.toString())
+            sPreferences = context?.getSharedPreferences("ref", MODE_PRIVATE)
 
-            SeaBattleService().getApi().login(
-                UserDto(
-                    username.text.toString(),
-                    password.text.toString()
-                )
-            )
+            SeaBattleService().getApi()
+                .login(
+                    UserDto(
+                        username,
+                        password
+                    ))
                 .enqueue(object : Callback<BooleanResponse> {
                     override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
                         message = t.message.orEmpty()
@@ -64,6 +68,8 @@ class LoginFragment : Fragment() {
                         isSuccess = response.isSuccessful
                         val body = response.body()!!
                         if (isSuccess && body.getMessage() == "") {
+                            sPreferences!!.edit().putString(R.string.currentUsername.toString(),
+                                username)?.apply()
                             toMenuTransaction()
                         } else {
                             if (TextUtils.isEmpty(message)) {

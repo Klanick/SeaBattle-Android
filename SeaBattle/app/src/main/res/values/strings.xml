@@ -23,19 +23,20 @@
     <string name="app_name">Морской Бой</string>
     <string name="game">Игра</string>
     <string name="quit">Выход</string>
-    <string name="ship">X</string>
-    <string name="miss">O</string>
+    <string name="ship" translatable="false">X</string>
+    <string name="miss" translatable="false">O</string>
     <string name="profileName">ПРОФИЛЬ</string>
     <string name="exit">ВЫЙТИ</string>
-    <string name="ship_failed_count">200000</string>
+    <string name="ship_failed_count" translatable="false">0</string>
     <string name="ship_failed">Кораблей потеряно</string>
-    <string name="ship_killed_count">200000</string>
+    <string name="ship_killed_count" translatable="false">0</string>
     <string name="ship_killed">Кораблей убито</string>
     <string name="profile_name">Nickname</string>
     <string name="Victory">Побед</string>
-    <string name="victory_count">10000000</string>
+    <string name="victory_count" translatable="false">0</string>
     <string name="Fail">Поражений</string>
-    <string name="faIL_count">200000</string>
+    <string name="faIL_count" translatable="false">0</string>
+    <string name="currentUsername" translatable="false">currentUsername</string>
     <string name="change_language">сменить язык</string>
     <string name="SkipButton">Пропустить</string>
     <string name="Clear">Очистить</string>

@@ -1,10 +1,11 @@
 package com.example.seabattle
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -41,6 +42,26 @@ class PreGameFragment : Fragment() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { state ->
+                    val gridLayout = binding.preGameGrid
+                    gridLayout.rowCount = 10
+                    gridLayout.columnCount = 10
+                    val imageViews = ArrayList<TextView>()
+                    for (x in 0 until 10) {
+                        for (y in 0 until 10) {
+                            val cellView = layoutInflater.inflate(R.layout.cell, binding.preGameGrid, false)
+                                    as TextView
+                            cellView.visibility = View.VISIBLE
+                            cellView.isClickable = true
+                            cellView.id
+                            cellView.setOnClickListener {
+                                println("Click on cell:($x;$y)")
+                                cellView.text = "X"
+                            }
+                            imageViews.add(cellView)
+                        }
+                    }
+                    imageViews.forEach(gridLayout::addView)
+
                     val backButton = binding.preGameBackButton
 
                     backButton.setOnClickListener {
@@ -49,7 +70,7 @@ class PreGameFragment : Fragment() {
                             FragmentManager.POP_BACK_STACK_INCLUSIVE)
                     }
 
-                    binding.preGameFormAddButton.setOnClickListener {
+                    /*binding.preGameFormAddButton.setOnClickListener {
                         try {
                             state.tryAdd(
                                 RectangleShip(
@@ -63,7 +84,7 @@ class PreGameFragment : Fragment() {
                         } catch (e: NumberFormatException) {
                             println("Not Number")
                         }
-                    }
+                    }*/
 
                     binding.preGameAutoButton.setOnClickListener {
                         try {
@@ -73,7 +94,7 @@ class PreGameFragment : Fragment() {
                         }
                     }
 
-                    binding.preGameFormDeleteButton.setOnClickListener {
+                    /*binding.preGameFormDeleteButton.setOnClickListener {
                         try {
                             state.tryDelete(
                                 RectangleShip(
@@ -87,7 +108,7 @@ class PreGameFragment : Fragment() {
                         } catch (e: NumberFormatException) {
                             println("Not Number")
                         }
-                    }
+                    }*/
 
                     binding.preGameClearButton.setOnClickListener {
                         state.clear()
