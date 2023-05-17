@@ -33,16 +33,16 @@ class RegistrationFragment : Fragment() {
         val errorMessage = binding.userFormErrorMessage
 
         loginButton.setOnClickListener {
-            val username = binding.userFormInclude.editTextTextPersonName
-            val password = binding.userFormInclude.editTextTextPassword
+            val username = binding.userFormInclude.editTextTextPersonName.text.toString()
+            val password = binding.userFormInclude.editTextTextPassword.text.toString()
 
             var message = ""
             var isSuccess: Boolean
 
             SeaBattleService().getApi().register(
                 UserDto(
-                    username.text.toString(),
-                    password.text.toString()
+                    username,
+                    password
                 )
             )
                 .enqueue(object : Callback<BooleanResponse> {

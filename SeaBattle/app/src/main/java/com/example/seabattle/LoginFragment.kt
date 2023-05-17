@@ -12,7 +12,6 @@ import com.example.seabattle.api.SeaBattleService
 import com.example.seabattle.api.model.BooleanResponse
 import com.example.seabattle.api.model.UserDto
 import com.example.seabattle.databinding.FragmentLoginBinding
-import kotlinx.coroutines.currentCoroutineContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,21 +37,20 @@ class LoginFragment : Fragment() {
 
         loginButton.setOnClickListener {
 
-            val username = requireActivity().findViewById<EditText>(R.id.editLoginLogin).text.toString()
-
-            val password = requireActivity().findViewById<EditText>(R.id.editPasswordLogin).text.toString()
+            val username = binding.userFormInclude.editTextTextPersonName.text.toString()
+            val password = binding.userFormInclude.editTextTextPassword.text.toString()
 
             var message = ""
             var isSuccess: Boolean
 
             sPreferences = context?.getSharedPreferences("ref", MODE_PRIVATE)
 
-            SeaBattleService().getApi().login(
-                UserDto(
-                    username,
-                    password
-                )
-            )
+            SeaBattleService().getApi()
+                .login(
+                    UserDto(
+                        username,
+                        password
+                    ))
                 .enqueue(object : Callback<BooleanResponse> {
                     override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
                         message = t.message.orEmpty()
