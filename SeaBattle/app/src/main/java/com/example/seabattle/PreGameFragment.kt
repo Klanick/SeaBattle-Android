@@ -1,10 +1,10 @@
 package com.example.seabattle
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.view.*
+import android.widget.FrameLayout
+import androidx.cardview.widget.CardView
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -45,17 +45,17 @@ class PreGameFragment : Fragment() {
                     val gridLayout = binding.preGameGrid
                     gridLayout.rowCount = 10
                     gridLayout.columnCount = 10
-                    val imageViews = ArrayList<TextView>()
+                    val imageViews = ArrayList<FrameLayout>()
                     for (x in 0 until 10) {
                         for (y in 0 until 10) {
                             val cellView = layoutInflater.inflate(R.layout.cell, binding.preGameGrid, false)
-                                    as TextView
+                                    as FrameLayout
                             cellView.visibility = View.VISIBLE
                             cellView.isClickable = true
                             cellView.id
                             cellView.setOnClickListener {
-                                println("Click on cell:($x;$y)")
-                                cellView.text = "X"
+                                val cardView = (cellView[0] as CardView)
+                                cardView.setCardBackgroundColor(resources.getColor(R.color.blue_500, null))
                             }
                             imageViews.add(cellView)
                         }
