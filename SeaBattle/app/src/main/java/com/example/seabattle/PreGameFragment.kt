@@ -42,13 +42,13 @@ class PreGameFragment : Fragment() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { state ->
-                    val gridLayout = binding.preGameGrid
+                    val gridLayout = binding.preGameGameBoard.preGameGrid
                     gridLayout.rowCount = 10
                     gridLayout.columnCount = 10
                     val imageViews = ArrayList<FrameLayout>()
                     for (x in 0 until 10) {
                         for (y in 0 until 10) {
-                            val cellView = layoutInflater.inflate(R.layout.cell, binding.preGameGrid, false)
+                            val cellView = layoutInflater.inflate(R.layout.cell, gridLayout, false)
                                     as FrameLayout
                             cellView.visibility = View.VISIBLE
                             cellView.isClickable = true
