@@ -4,6 +4,7 @@ import com.example.seabattleserver.model.BooleanResponse;
 import com.example.seabattleserver.model.User;
 import com.example.seabattleserver.service.UserService;
 import jakarta.security.auth.message.AuthException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<BooleanResponse> registerUser(@RequestBody User user) {
+    public ResponseEntity<BooleanResponse> registerUser(@RequestBody @Valid User user) {
         try {
             if (userService.registerUser(user)) {
                 return ResponseEntity.ok(BooleanResponse.of(true));

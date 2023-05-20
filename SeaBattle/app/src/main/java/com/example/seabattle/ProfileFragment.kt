@@ -50,8 +50,6 @@ class ProfileFragment : Fragment() {
 
         setTextView(R.id.Nickname, realUsername)
 
-        System.err.println(realUsername)
-
         SeaBattleService().getApi().getStatistic(realUsername)
             .enqueue(object : Callback<StatisticDto> {
                 override fun onFailure(call: Call<StatisticDto>, t: Throwable) {

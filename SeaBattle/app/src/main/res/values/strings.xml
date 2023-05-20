@@ -18,8 +18,9 @@
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="localhostAddress" translatable="false">192.168.0.36:8080</string>
-    <string name="unexpectedError" translatable="false">Unexpected Error</string>
+    <string name="localhostAddress" translatable="false">192.168.1.101:8080</string>
+    <string name="unexpectedError">Что-то пошло не так</string>
+    <string name="lostConnection">Потеряно соединение с сервером</string>
     <string name="app_name">Морской Бой</string>
     <string name="game">Игра</string>
     <string name="quit">Выход</string>
@@ -35,6 +36,7 @@
     <string name="Victory">Побед</string>
     <string name="victory_count" translatable="false">0</string>
     <string name="Fail">Поражений</string>
+    <string name="faIL_count">0</string>
     <string name="faIL_count" translatable="false">0</string>
     <string name="currentUsername" translatable="false">currentUsername</string>
     <string name="change_language">сменить язык</string>

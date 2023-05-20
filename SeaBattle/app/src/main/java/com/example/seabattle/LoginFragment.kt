@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.seabattle.api.SeaBattleService
 import com.example.seabattle.api.model.BooleanResponse
@@ -15,6 +16,7 @@ import com.example.seabattle.databinding.FragmentLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.ConnectException
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
@@ -40,7 +42,6 @@ class LoginFragment : Fragment() {
             val username = binding.userFormInclude.editTextTextPersonName.text.toString()
             val password = binding.userFormInclude.editTextTextPassword.text.toString()
 
-            var message = ""
             var isSuccess: Boolean
 
             sPreferences = context?.getSharedPreferences("ref", MODE_PRIVATE)
@@ -53,11 +54,10 @@ class LoginFragment : Fragment() {
                     ))
                 .enqueue(object : Callback<BooleanResponse> {
                     override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
-                        message = t.message.orEmpty()
-                        if (TextUtils.isEmpty(message)) {
-                            errorMessage.setText(R.string.unexpectedError)
+                        if (t::class == ConnectException::class) {
+                            errorMessage.setText(R.string.lostConnection)
                         } else {
-                            errorMessage.text = message
+                            errorMessage.setText(R.string.unexpectedError)
                         }
                     }
 
@@ -72,11 +72,7 @@ class LoginFragment : Fragment() {
                                 username)?.apply()
                             toMenuTransaction()
                         } else {
-                            if (TextUtils.isEmpty(message)) {
-                                errorMessage.text = body.getMessage()
-                            } else {
-                                errorMessage.text = message
-                            }
+                            errorMessage.setText(R.string.unexpectedError)
                         }
                     }
                 })
