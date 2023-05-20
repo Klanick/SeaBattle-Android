@@ -14,6 +14,7 @@ import com.example.seabattle.databinding.FragmentRegistrationBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.ConnectException
 
 class RegistrationFragment : Fragment() {
     private var _binding: FragmentRegistrationBinding? = null
@@ -33,25 +34,21 @@ class RegistrationFragment : Fragment() {
         val errorMessage = binding.userFormErrorMessage
 
         loginButton.setOnClickListener {
-            val username = binding.userFormInclude.editTextTextPersonName
-            val password = binding.userFormInclude.editTextTextPassword
-
-            var message = ""
-            var isSuccess: Boolean
+            val username = binding.userFormInclude.editTextTextPersonName.text.toString()
+            val password = binding.userFormInclude.editTextTextPassword.text.toString()
 
             SeaBattleService().getApi().register(
                 UserDto(
-                    username.text.toString(),
-                    password.text.toString()
+                    username,
+                    password
                 )
             )
                 .enqueue(object : Callback<BooleanResponse> {
                     override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
-                        message = t.message.orEmpty()
-                        if (isEmpty(message)) {
-                            errorMessage.setText(R.string.unexpectedError)
+                        if (t::class == ConnectException::class) {
+                            errorMessage.setText(R.string.lostConnection)
                         } else {
-                            errorMessage.text = message
+                            errorMessage.setText(R.string.unexpectedError)
                         }
                     }
 
@@ -59,16 +56,10 @@ class RegistrationFragment : Fragment() {
                         call: Call<BooleanResponse>,
                         response: Response<BooleanResponse>
                     ) {
-                        isSuccess = response.isSuccessful
-                        val body = response.body()!!
-                        if (isSuccess && body.getMessage() == "") {
+                        if (response.isSuccessful && response.body()!!.getMessage() == "") {
                             backTransaction()
                         } else {
-                            if (isEmpty(message)) {
-                                errorMessage.text = body.getMessage()
-                            } else {
-                                errorMessage.text = message
-                            }
+                            errorMessage.setText(R.string.unexpectedError)
                         }
                     }
                 })
@@ -82,6 +73,7 @@ class RegistrationFragment : Fragment() {
     private fun backTransaction() {
         requireActivity().supportFragmentManager.popBackStack(
             "LoginToRegistration",
-            FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
     }
 }
