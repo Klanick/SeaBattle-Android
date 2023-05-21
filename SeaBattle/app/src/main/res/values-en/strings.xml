@@ -3,6 +3,7 @@
     <string name="passwordHint">Password</string>
     <string name="registrationButton">Register</string>
     <string name="loginButton">Login</string>
+    <string name="logoutButton">Logout</string>
 
     <string name="preGameHeader">Ships location</string>
     <string name="inputCoordinatesHeader">Input coordinates</string>

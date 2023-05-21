@@ -15,6 +15,8 @@ class RegistrationFragment : Fragment() {
     private var _binding: FragmentRegistrationBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: RegistrationViewModel
+    private var progressBarVisibility : Int = View.INVISIBLE
+    private var errorMessage: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,17 +29,31 @@ class RegistrationFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.run {
-            putInt(R.string.visible.toString(), binding.progressBarRegistration.visibility)
+            putInt(R.string.visible.toString(), progressBarVisibility)
             putString(R.string.errorMessage.toString(),
-                binding.userFormErrorMessage.text.toString())
+                errorMessage)
         }
         super.onSaveInstanceState(outState)
+    }
+    private fun setProgressBarVisibility(visibility: Int) {
+        progressBarVisibility = visibility
+        binding.progressBarRegistration.visibility = visibility
+    }
+
+    private fun setErrorMessage(resId : Int) {
+        binding.userFormErrorMessage.setText(resId)
+        errorMessage = binding.userFormErrorMessage.text.toString()
+    }
+
+    private fun setErrorMessage(charSequence: CharSequence?) {
+        binding.userFormErrorMessage.text = charSequence
+        errorMessage = binding.userFormErrorMessage.text.toString()
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         savedInstanceState?.run {
-            binding.progressBarRegistration.visibility = getInt(R.string.visible.toString())
-            binding.userFormErrorMessage.text = getString(R.string.errorMessage.toString())
+            setProgressBarVisibility(getInt(R.string.visible.toString()))
+            setErrorMessage(getString(R.string.errorMessage.toString()))
         }
         super.onViewStateRestored(savedInstanceState)
     }
@@ -45,8 +61,7 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val loginButton = binding.userFormButton
-        val errorMessage = binding.userFormErrorMessage
-        errorMessage.text = ""
+        setErrorMessage("")
         viewModel.liveData.observe(viewLifecycleOwner) {
             if (it == -2) {
                 return@observe
@@ -56,14 +71,14 @@ class RegistrationFragment : Fragment() {
                 viewModel.liveData.postValue(-2)
                 return@observe
             }
-            binding.progressBarRegistration.visibility = View.INVISIBLE
-            errorMessage.setText(it)
+            setProgressBarVisibility(View.INVISIBLE)
+            setErrorMessage(it)
             viewModel.liveData.postValue(-2)
         }
 
         loginButton.setOnClickListener {
-            binding.progressBarRegistration.visibility = View.VISIBLE
-            errorMessage.text = ""
+            setProgressBarVisibility(View.VISIBLE)
+            setErrorMessage("")
 
             val username = binding.userFormInclude.editTextTextPersonName.text.toString()
             val password = binding.userFormInclude.editTextTextPassword.text.toString()
@@ -73,8 +88,8 @@ class RegistrationFragment : Fragment() {
             val validationResult = validate(user)
 
             if (validationResult != -1) {
-                errorMessage.setText(validationResult)
-                binding.progressBarRegistration.visibility = View.INVISIBLE
+                setErrorMessage(validationResult)
+                setProgressBarVisibility(View.INVISIBLE)
             } else {
                 viewModel.register(user)
             }

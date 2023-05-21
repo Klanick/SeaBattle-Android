@@ -1,61 +1,62 @@
 <androidx.cardview.widget.CardView
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-tools:context=".pre_game.PreGameFormForNewFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".pre_game.PreGameFormForNewFragment"
 
-android:id="@+id/pre_game__form__context"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-app:layout_constraintTop_toTopOf="parent"
-app:layout_constraintBottom_toBottomOf="parent"
-android:layout_margin="20dp"
-app:cardCornerRadius="5dp"
-    >
-<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/pre_game__form__context"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <FrameLayout
-        android:id="@+id/pre_game__form__cancel_button"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:background="@drawable/baseline_cancel_48"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="2dp"
-        android:clickable="true"
-        android:focusable="true">
-    </FrameLayout>
-    <LinearLayout
-        android:id="@+id/pre_game__form__button_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/pre_game__form__cancel_button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp">
-        <Button
-            android:id="@+id/pre_game__form__add_button"
+    android:layout_height="match_parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="5dp"
+    app:cardBackgroundColor="@color/blue_200"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/pre_game__form__cancel_button"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/baseline_cancel_48"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="2dp"
+            android:clickable="true"
+            android:focusable="true">
+        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/pre_game__form__button_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/addButton"
-            android:layout_marginHorizontal="10dp">
-        </Button>
-    </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/pre_game__form__cancel_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp">
+            <Button
+                android:id="@+id/pre_game__form__add_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addButton"
+                android:layout_marginHorizontal="10dp">
+            </Button>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/pre_game__form__error_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/pre_game__form__button_container"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textColor="@color/red_a400"
-        android:textAlignment="center"
-        android:text=""
-        android:layout_margin="5dp">
-    </TextView>
+        <TextView
+            android:id="@+id/pre_game__form__error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/pre_game__form__button_container"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/red_a400"
+            android:textAlignment="center"
+            android:text=""
+            android:layout_margin="5dp">
+        </TextView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
