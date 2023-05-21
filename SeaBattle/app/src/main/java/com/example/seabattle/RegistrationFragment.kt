@@ -52,7 +52,6 @@ class RegistrationFragment : Fragment() {
                 SeaBattleService().getApi().register(user)
                     .enqueue(object : Callback<BooleanResponse> {
                         override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
-                            System.err.println(t::class.toString() + t.message)
                             if (t::class == ConnectException::class ||
                                     t::class == SocketTimeoutException::class
                             ) {
@@ -67,7 +66,6 @@ class RegistrationFragment : Fragment() {
                             call: Call<BooleanResponse>,
                             response: Response<BooleanResponse>
                         ) {
-                            System.err.println("mew")
                             if (response.isSuccessful && response.body()!!.getMessage() == "") {
                                 backTransaction()
                             } else {
