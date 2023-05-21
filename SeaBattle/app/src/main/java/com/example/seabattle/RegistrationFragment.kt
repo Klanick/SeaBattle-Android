@@ -34,6 +34,8 @@ class RegistrationFragment : Fragment() {
         val errorMessage = binding.userFormErrorMessage
 
         loginButton.setOnClickListener {
+            errorMessage.text = ""
+
             val username = binding.userFormInclude.editTextTextPersonName.text.toString()
             val password = binding.userFormInclude.editTextTextPassword.text.toString()
 

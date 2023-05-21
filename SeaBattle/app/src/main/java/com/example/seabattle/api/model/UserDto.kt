@@ -10,7 +10,7 @@ data class UserDto(
     companion object {
         // Валидирует данные и возвращает -1, если всё ок
         public fun validate(user: UserDto): Int {
-            if (user.username == null || user.username!!.length < 2 || user.username!!.length > 5) {
+            if (user.username == null || user.username!!.length < 2 || user.username!!.length > 15) {
                 return R.string.validationUsernameMessage
             }
             if (user.password == null || !Pattern.matches("[A-Za-z0-9_\\-!@#\$%]+", user.password.toString())) {

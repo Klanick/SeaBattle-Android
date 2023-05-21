@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.seabattle.api.SeaBattleService
 import com.example.seabattle.api.model.BooleanResponse
 import com.example.seabattle.api.model.UserDto
+import com.example.seabattle.api.model.UserDto.Companion.validate
 import com.example.seabattle.databinding.FragmentLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -42,44 +43,50 @@ class LoginFragment : Fragment() {
         }
 
         loginButton.setOnClickListener {
+            errorMessage.text = ""
 
             val username = binding.userFormInclude.editTextTextPersonName.text.toString()
             val password = binding.userFormInclude.editTextTextPassword.text.toString()
 
             var isSuccess: Boolean
 
-            SeaBattleService().getApi().login(
-                UserDto(
-                    username,
-                    password
-                )
-            )
-                .enqueue(object : Callback<BooleanResponse> {
-                    override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
-                        if (t::class == ConnectException::class) {
-                            errorMessage.setText(R.string.lostConnection)
-                        } else {
-                            errorMessage.setText(R.string.unexpectedError)
-                        }
-                    }
+            val user = UserDto(username, password)
 
-                    override fun onResponse(
-                        call: Call<BooleanResponse>,
-                        response: Response<BooleanResponse>
-                    ) {
-                        isSuccess = response.isSuccessful
-                        val body = response.body()!!
-                        if (isSuccess && body.getMessage() == "") {
-                            sPreferences!!.edit().putString(
-                                R.string.currentUsername.toString(),
-                                username
-                            )?.apply()
-                            toMenuTransaction()
-                        } else {
-                            errorMessage.setText(R.string.unexpectedError)
+            val validationResult = validate(user)
+
+            if (validationResult != -1) {
+                errorMessage.setText(validationResult)
+            } else {
+                SeaBattleService().getApi().login(
+                    user
+                )
+                    .enqueue(object : Callback<BooleanResponse> {
+                        override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
+                            if (t::class == ConnectException::class) {
+                                errorMessage.setText(R.string.lostConnection)
+                            } else {
+                                errorMessage.setText(R.string.unexpectedError)
+                            }
                         }
-                    }
-                })
+
+                        override fun onResponse(
+                            call: Call<BooleanResponse>,
+                            response: Response<BooleanResponse>
+                        ) {
+                            isSuccess = response.isSuccessful
+                            val body = response.body()!!
+                            if (isSuccess && body.getMessage() == "") {
+                                sPreferences!!.edit().putString(
+                                    R.string.currentUsername.toString(),
+                                    username
+                                )?.apply()
+                                toMenuTransaction()
+                            } else {
+                                errorMessage.setText(R.string.unexpectedError)
+                            }
+                        }
+                    })
+            }
         }
 
         registrationButton.setOnClickListener {
