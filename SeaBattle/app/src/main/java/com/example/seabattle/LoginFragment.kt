@@ -3,11 +3,9 @@ package com.example.seabattle
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.seabattle.api.SeaBattleService
 import com.example.seabattle.api.model.BooleanResponse
@@ -37,6 +35,12 @@ class LoginFragment : Fragment() {
         val registrationButton = binding.registration
         val errorMessage = binding.userFormErrorMessage
 
+        sPreferences = context?.getSharedPreferences("ref", MODE_PRIVATE)
+
+        if (isNotBlank(sPreferences?.getString(R.string.currentUsername.toString(), null))) {
+            toMenuTransaction()
+        }
+
         loginButton.setOnClickListener {
 
             val username = binding.userFormInclude.editTextTextPersonName.text.toString()
@@ -44,14 +48,12 @@ class LoginFragment : Fragment() {
 
             var isSuccess: Boolean
 
-            sPreferences = context?.getSharedPreferences("ref", MODE_PRIVATE)
-
-            SeaBattleService().getApi()
-                .login(
-                    UserDto(
-                        username,
-                        password
-                    ))
+            SeaBattleService().getApi().login(
+                UserDto(
+                    username,
+                    password
+                )
+            )
                 .enqueue(object : Callback<BooleanResponse> {
                     override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
                         if (t::class == ConnectException::class) {
@@ -68,8 +70,10 @@ class LoginFragment : Fragment() {
                         isSuccess = response.isSuccessful
                         val body = response.body()!!
                         if (isSuccess && body.getMessage() == "") {
-                            sPreferences!!.edit().putString(R.string.currentUsername.toString(),
-                                username)?.apply()
+                            sPreferences!!.edit().putString(
+                                R.string.currentUsername.toString(),
+                                username
+                            )?.apply()
                             toMenuTransaction()
                         } else {
                             errorMessage.setText(R.string.unexpectedError)
@@ -92,6 +96,14 @@ class LoginFragment : Fragment() {
             toMenuTransaction()
         }
     }
+
+    private fun isNotBlank(string: String?): Boolean {
+        if (string == null) {
+            return false
+        }
+        return string.trim().isNotBlank();
+    }
+
 
     private fun toMenuTransaction() {
         val fragment = MenuFragment()
