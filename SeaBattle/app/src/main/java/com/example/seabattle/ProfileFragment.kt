@@ -44,16 +44,18 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val exitProfileButton = binding.profileExit
+        val errorMessage = binding.errorMessage
         sPreferences  = context?.getSharedPreferences("ref", Context.MODE_PRIVATE)
 
         val realUsername = sPreferences?.getString(R.string.currentUsername.toString(), "").orEmpty()
 
         setTextView(R.id.Nickname, realUsername)
 
+
         SeaBattleService().getApi().getStatistic(realUsername)
             .enqueue(object : Callback<StatisticDto> {
                 override fun onFailure(call: Call<StatisticDto>, t: Throwable) {
-                    // ??
+                    errorMessage.setText(R.string.unexpectedError)
                 }
 
                 override fun onResponse(

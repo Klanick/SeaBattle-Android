@@ -30,6 +30,12 @@ class MenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sPreferences = context?.getSharedPreferences("ref", Context.MODE_PRIVATE)
+
+        if (!isNotBlank(sPreferences?.getString(R.string.currentUsername.toString(), null))) {
+            binding.profileButton.isEnabled = false
+        }
         val gameButton = binding.gameButton
 
         gameButton.setOnClickListener {
@@ -62,5 +68,12 @@ class MenuFragment : Fragment() {
                 .addToBackStack("MenuToProfile")
                 .commit()
         }
+    }
+
+    private fun isNotBlank(string: String?): Boolean {
+        if (string == null) {
+            return false
+        }
+        return string.trim().isNotBlank()
     }
 }
