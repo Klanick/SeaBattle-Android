@@ -30,4 +30,6 @@
     <string name="SkipButton">Skip</string>
     <string name="Clear">Clear</string>
     <string name="Auto">Auto</string>
+    <string name="validationUsernameMessage">Invalid username</string>
+    <string name="validationPasswordMessage">Invalid password</string>
 </resources>
