@@ -15,6 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.net.ConnectException
+import java.net.SocketTimeoutException
 
 class RegistrationFragment : Fragment() {
     private var _binding: FragmentRegistrationBinding? = null
@@ -34,6 +35,7 @@ class RegistrationFragment : Fragment() {
         val errorMessage = binding.userFormErrorMessage
 
         loginButton.setOnClickListener {
+            binding.progressBarRegistration.visibility = View.VISIBLE
             errorMessage.text = ""
 
             val username = binding.userFormInclude.editTextTextPersonName.text.toString()
@@ -45,26 +47,33 @@ class RegistrationFragment : Fragment() {
 
             if (validationResult != -1) {
                 errorMessage.setText(validationResult)
+                binding.progressBarRegistration.visibility = View.INVISIBLE
             } else {
                 SeaBattleService().getApi().register(user)
                     .enqueue(object : Callback<BooleanResponse> {
                         override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
-                            if (t::class == ConnectException::class) {
+                            System.err.println(t::class.toString() + t.message)
+                            if (t::class == ConnectException::class ||
+                                    t::class == SocketTimeoutException::class
+                            ) {
                                 errorMessage.setText(R.string.lostConnection)
                             } else {
                                 errorMessage.setText(R.string.unexpectedError)
                             }
+                            binding.progressBarRegistration.visibility = View.INVISIBLE
                         }
 
                         override fun onResponse(
                             call: Call<BooleanResponse>,
                             response: Response<BooleanResponse>
                         ) {
+                            System.err.println("mew")
                             if (response.isSuccessful && response.body()!!.getMessage() == "") {
                                 backTransaction()
                             } else {
                                 errorMessage.setText(R.string.unexpectedError)
                             }
+                            binding.progressBarRegistration.visibility = View.INVISIBLE
                         }
                     })
             }

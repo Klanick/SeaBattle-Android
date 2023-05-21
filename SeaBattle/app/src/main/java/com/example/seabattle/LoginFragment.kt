@@ -16,6 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.net.ConnectException
+import java.net.SocketTimeoutException
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
@@ -43,12 +44,11 @@ class LoginFragment : Fragment() {
         }
 
         loginButton.setOnClickListener {
+            binding.progressBarLogin.visibility = View.VISIBLE
             errorMessage.text = ""
 
             val username = binding.userFormInclude.editTextTextPersonName.text.toString()
             val password = binding.userFormInclude.editTextTextPassword.text.toString()
-
-            var isSuccess: Boolean
 
             val user = UserDto(username, password)
 
@@ -56,26 +56,28 @@ class LoginFragment : Fragment() {
 
             if (validationResult != -1) {
                 errorMessage.setText(validationResult)
+                binding.progressBarLogin.visibility = View.INVISIBLE
             } else {
                 SeaBattleService().getApi().login(
                     user
                 )
                     .enqueue(object : Callback<BooleanResponse> {
                         override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
-                            if (t::class == ConnectException::class) {
+                            if (t::class == ConnectException::class ||
+                                t::class == SocketTimeoutException::class
+                            ) {
                                 errorMessage.setText(R.string.lostConnection)
                             } else {
                                 errorMessage.setText(R.string.unexpectedError)
                             }
+                            binding.progressBarLogin.visibility = View.INVISIBLE
                         }
 
                         override fun onResponse(
                             call: Call<BooleanResponse>,
                             response: Response<BooleanResponse>
                         ) {
-                            isSuccess = response.isSuccessful
-                            val body = response.body()!!
-                            if (isSuccess && body.getMessage() == "") {
+                            if (response.isSuccessful && response.body()!!.getMessage() == "") {
                                 sPreferences!!.edit().putString(
                                     R.string.currentUsername.toString(),
                                     username
@@ -84,6 +86,7 @@ class LoginFragment : Fragment() {
                             } else {
                                 errorMessage.setText(R.string.unexpectedError)
                             }
+                            binding.progressBarLogin.visibility = View.INVISIBLE
                         }
                     })
             }
@@ -108,7 +111,7 @@ class LoginFragment : Fragment() {
         if (string == null) {
             return false
         }
-        return string.trim().isNotBlank();
+        return string.trim().isNotBlank()
     }
 
 

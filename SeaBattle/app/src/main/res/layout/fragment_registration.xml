@@ -78,4 +78,15 @@
             android:layout_marginVertical="5dp"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_form"
+        android:visibility="invisible"
+        android:indeterminateTint="@color/blue_500"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
