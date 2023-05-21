@@ -3,6 +3,7 @@
     <string name="passwordHint">Пароль</string>
     <string name="registrationButton">Регистрация</string>
     <string name="loginButton">Войти</string>
+    <string name="logoutButton">Разлогиниться</string>
 
     <string name="preGameHeader">Расположение кораблей</string>
     <string name="inputCoordinatesHeader">Введите координаты</string>
@@ -38,6 +39,7 @@
     <string name="Fail">Поражений</string>
     <string name="faIL_count" translatable="false">0</string>
     <string name="currentUsername" translatable="false">currentUsername</string>
+    <string name="noUser" translatable="false">NoUser</string>
     <string name="change_language">сменить язык</string>
     <string name="SkipButton">Пропустить</string>
     <string name="Clear">Очистить</string>

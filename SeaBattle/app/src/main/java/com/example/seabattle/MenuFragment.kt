@@ -35,6 +35,8 @@ class MenuFragment : Fragment() {
 
         if (!isNotBlank(sPreferences?.getString(R.string.currentUsername.toString(), null))) {
             binding.profileButton.isEnabled = false
+        } else {
+            binding.loginButton.text = requireContext().getText(R.string.logoutButton)
         }
         val gameButton = binding.gameButton
 
@@ -47,11 +49,11 @@ class MenuFragment : Fragment() {
                 .addToBackStack("MenuToPreGame")
                 .commit()
         }
-        val exitButton = binding.exitButton
+        val loginButton = binding.loginButton
 
         sPreferences = context?.getSharedPreferences("ref", Context.MODE_PRIVATE)
 
-        exitButton.setOnClickListener {
+        loginButton.setOnClickListener {
             sPreferences?.edit()?.remove(R.string.currentUsername.toString())?.apply()
             requireActivity().supportFragmentManager.popBackStack(
                 "LoginToMenu",
