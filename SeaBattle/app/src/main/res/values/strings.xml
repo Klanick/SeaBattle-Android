@@ -36,11 +36,12 @@
     <string name="Victory">Побед</string>
     <string name="victory_count" translatable="false">0</string>
     <string name="Fail">Поражений</string>
-    <string name="faIL_count">0</string>
     <string name="faIL_count" translatable="false">0</string>
     <string name="currentUsername" translatable="false">currentUsername</string>
     <string name="change_language">сменить язык</string>
     <string name="SkipButton">Пропустить</string>
     <string name="Clear">Очистить</string>
     <string name="Auto">Авто</string>
+    <string name="validationUsernameMessage">Некорректное имя пользователя</string>
+    <string name="validationPasswordMessage">Некорректный пароль</string>
 </resources>
