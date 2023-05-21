@@ -44,4 +44,6 @@
     <string name="Auto">Авто</string>
     <string name="validationUsernameMessage">Некорректное имя пользователя</string>
     <string name="validationPasswordMessage">Некорректный пароль</string>
+    <string name="visible" translatable="false">isVisible</string>
+    <string name="errorMessage" translatable="false">errorMessage</string>
 </resources>

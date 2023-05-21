@@ -4,8 +4,8 @@ import com.example.seabattle.R
 import java.util.regex.Pattern
 
 data class UserDto(
-    private var username: String? = null,
-    private var password: String? = null
+    var username: String? = null,
+    var password: String? = null
 ) {
     companion object {
         // Валидирует данные и возвращает -1, если всё ок
