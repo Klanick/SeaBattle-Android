@@ -70,8 +70,10 @@ class LoginFragment : Fragment() {
                         isSuccess = response.isSuccessful
                         val body = response.body()!!
                         if (isSuccess && body.getMessage() == "") {
-                            sPreferences!!.edit().putString(R.string.currentUsername.toString(),
-                                username)?.apply()
+                            sPreferences!!.edit().putString(
+                                R.string.currentUsername.toString(),
+                                username
+                            )?.apply()
                             toMenuTransaction()
                         } else {
                             errorMessage.setText(R.string.unexpectedError)
