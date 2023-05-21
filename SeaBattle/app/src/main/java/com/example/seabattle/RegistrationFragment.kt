@@ -1,7 +1,6 @@
 package com.example.seabattle
 
 import android.os.Bundle
-import android.text.TextUtils.isEmpty
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,12 @@ import androidx.fragment.app.FragmentManager
 import com.example.seabattle.api.SeaBattleService
 import com.example.seabattle.api.model.BooleanResponse
 import com.example.seabattle.api.model.UserDto
+import com.example.seabattle.api.model.UserDto.Companion.validate
 import com.example.seabattle.databinding.FragmentRegistrationBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.ConnectException
 
 class RegistrationFragment : Fragment() {
     private var _binding: FragmentRegistrationBinding? = null
@@ -36,42 +37,35 @@ class RegistrationFragment : Fragment() {
             val username = binding.userFormInclude.editTextTextPersonName.text.toString()
             val password = binding.userFormInclude.editTextTextPassword.text.toString()
 
-            var message = ""
-            var isSuccess: Boolean
+            val user = UserDto(username, password)
 
-            SeaBattleService().getApi().register(
-                UserDto(
-                    username,
-                    password
-                )
-            )
-                .enqueue(object : Callback<BooleanResponse> {
-                    override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
-                        message = t.message.orEmpty()
-                        if (isEmpty(message)) {
-                            errorMessage.setText(R.string.unexpectedError)
-                        } else {
-                            errorMessage.text = message
-                        }
-                    }
+            val validationResult = validate(user)
 
-                    override fun onResponse(
-                        call: Call<BooleanResponse>,
-                        response: Response<BooleanResponse>
-                    ) {
-                        isSuccess = response.isSuccessful
-                        val body = response.body()!!
-                        if (isSuccess && body.getMessage() == "") {
-                            backTransaction()
-                        } else {
-                            if (isEmpty(message)) {
-                                errorMessage.text = body.getMessage()
+            if (validationResult != -1) {
+                errorMessage.setText(validationResult)
+            } else {
+                SeaBattleService().getApi().register(user)
+                    .enqueue(object : Callback<BooleanResponse> {
+                        override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
+                            if (t::class == ConnectException::class) {
+                                errorMessage.setText(R.string.lostConnection)
                             } else {
-                                errorMessage.text = message
+                                errorMessage.setText(R.string.unexpectedError)
                             }
                         }
-                    }
-                })
+
+                        override fun onResponse(
+                            call: Call<BooleanResponse>,
+                            response: Response<BooleanResponse>
+                        ) {
+                            if (response.isSuccessful && response.body()!!.getMessage() == "") {
+                                backTransaction()
+                            } else {
+                                errorMessage.setText(R.string.unexpectedError)
+                            }
+                        }
+                    })
+            }
         }
 
         binding.backButton.setOnClickListener {
@@ -82,6 +76,7 @@ class RegistrationFragment : Fragment() {
     private fun backTransaction() {
         requireActivity().supportFragmentManager.popBackStack(
             "LoginToRegistration",
-            FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
     }
 }

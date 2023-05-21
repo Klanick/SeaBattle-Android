@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SeaBattleService {
 
-    private val url = "http://192.168.0.36:8080"
+    private val url = "http://192.168.1.101:8080"
 
     private var seaBattleApi = createRetrofit().create(SeaBattleApi::class.java)
 
@@ -16,7 +16,6 @@ class SeaBattleService {
 
     private fun createRetrofit(): Retrofit {
         return Retrofit.Builder()
-                // Это надо засунуть в про
             .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

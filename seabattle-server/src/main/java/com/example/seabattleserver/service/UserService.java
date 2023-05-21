@@ -1,15 +1,10 @@
 package com.example.seabattleserver.service;
 
-import java.util.Optional;
-
 import com.example.seabattleserver.dao.UserDao;
 import com.example.seabattleserver.model.User;
 import jakarta.security.auth.message.AuthException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Service;
-
-import static java.util.Optional.ofNullable;
 
 @Service
 @RequiredArgsConstructor

@@ -1,5 +1,7 @@
 package com.example.seabattle
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +18,7 @@ import com.example.seabattle.databinding.FragmentMenuBinding
 class MenuFragment : Fragment() {
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
+    private var sPreferences: SharedPreferences? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +43,10 @@ class MenuFragment : Fragment() {
         }
         val exitButton = binding.exitButton
 
+        sPreferences = context?.getSharedPreferences("ref", Context.MODE_PRIVATE)
+
         exitButton.setOnClickListener {
+            sPreferences?.edit()?.remove(R.string.currentUsername.toString())?.apply()
             requireActivity().supportFragmentManager.popBackStack(
                 "LoginToMenu",
                 FragmentManager.POP_BACK_STACK_INCLUSIVE)
