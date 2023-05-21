@@ -30,6 +30,18 @@
     <string name="SkipButton">Skip</string>
     <string name="Clear">Clear</string>
     <string name="Auto">Auto</string>
+  
     <string name="validationUsernameMessage">Invalid username</string>
     <string name="validationPasswordMessage">Invalid password</string>
+
+    <string name="shipTooCloseMessage" >Too close to another</string>
+    <string name="shipOutOfBoardMessage">Ship out of board</string>
+    <string name="wrongShipsCountMessage">Wrong ship\'s count</string>
+    <string name="wrongShipsCountForTypeMessage">Wrong ship\'s Count for type</string>
+    <string name="fullShipCollectionMessage">Ship collection already full</string>
+    <string name="fullShipTypeMessage">Already enough ships for this type</string>
+    <string name="unexpectedShipTypeMessage">Unexpected ship type</string>
+    <string name="noEnoughSpaceMessage">No enough space</string>
+    <string name="shipAlreadyExistMessage">Ship already exist</string>
+    <string name="shipNotExistMessage">Ship don\'t exist</string>
 </resources>
