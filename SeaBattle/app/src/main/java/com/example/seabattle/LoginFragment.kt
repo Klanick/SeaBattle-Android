@@ -3,17 +3,14 @@ package com.example.seabattle
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.seabattle.api.SeaBattleService
 import com.example.seabattle.api.model.BooleanResponse
 import com.example.seabattle.api.model.UserDto
 import com.example.seabattle.databinding.FragmentLoginBinding
-import kotlinx.coroutines.currentCoroutineContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,14 +35,18 @@ class LoginFragment : Fragment() {
         val registrationButton = binding.registration
         val errorMessage = binding.userFormErrorMessage
 
+        sPreferences = context?.getSharedPreferences("ref", MODE_PRIVATE)
+
+        if (isNotBlank(sPreferences?.getString(R.string.currentUsername.toString(), null))) {
+            toMenuTransaction()
+        }
+
         loginButton.setOnClickListener {
 
             val username = binding.userFormInclude.editTextTextPersonName.text.toString()
             val password = binding.userFormInclude.editTextTextPassword.text.toString()
 
             var isSuccess: Boolean
-
-            sPreferences = context?.getSharedPreferences("ref", MODE_PRIVATE)
 
             SeaBattleService().getApi().login(
                 UserDto(
@@ -93,6 +94,14 @@ class LoginFragment : Fragment() {
             toMenuTransaction()
         }
     }
+
+    private fun isNotBlank(string: String?): Boolean {
+        if (string == null) {
+            return false
+        }
+        return string.trim().isNotBlank();
+    }
+
 
     private fun toMenuTransaction() {
         val fragment = MenuFragment()

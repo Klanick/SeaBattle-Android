@@ -24,6 +24,6 @@ public class User {
     @NonNull
     @JsonProperty
     @NotEmpty
-    @Pattern(regexp = "[A-Za-z0-9_\\-!@#$%]")
+    @Pattern(regexp = "[A-Za-z0-9_\\-!@#$%]+")
     String password;
 }
