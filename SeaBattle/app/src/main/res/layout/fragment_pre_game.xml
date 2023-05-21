@@ -87,7 +87,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/pre_game__form_block"
+                android:id="@+id/pre_game__form_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/pre_game_board_block_out"
@@ -96,21 +96,37 @@
                 android:backgroundTint="@color/blue_100"
                 app:cardCornerRadius="5dp"
                 >
-                <include layout="@layout/add_ship_form"/>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/pre_game__ready_button"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/pre_game__ready_button_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginVertical="5dp"
-        android:layout_marginHorizontal="10dp"
-        android:textSize="15sp"
-        android:text="@string/readyButton"
-        />
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/pre_game__ready__error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/pre_game__form__button_container"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/red_a400"
+            android:textAlignment="center">
+        </TextView>
+
+        <Button
+            android:id="@+id/pre_game__ready_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="15sp"
+            android:text="@string/readyButton"
+            />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

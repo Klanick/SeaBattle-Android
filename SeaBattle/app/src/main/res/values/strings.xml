@@ -41,4 +41,15 @@
     <string name="SkipButton">Пропустить</string>
     <string name="Clear">Очистить</string>
     <string name="Auto">Авто</string>
+
+    <string name="shipTooCloseMessage" >Слишком близко к другим</string>
+    <string name="shipOutOfBoardMessage">Корабль вне поля</string>
+    <string name="wrongShipsCountMessage">Неверное количество кораблей</string>
+    <string name="wrongShipsCountForTypeMessage">Неверное количество кораблей нужного типа</string>
+    <string name="fullShipCollectionMessage">Набор кораблей уже полон</string>
+    <string name="fullShipTypeMessage">Кораблей данного типа уже достаточно</string>
+    <string name="unexpectedShipTypeMessage">Корабль не подходящего типа</string>
+    <string name="noEnoughSpaceMessage">Недостаточно места</string>
+    <string name="shipAlreadyExistMessage">Корабль уже существует</string>
+    <string name="shipNotExistMessage">Такого корабля нету</string>
 </resources>

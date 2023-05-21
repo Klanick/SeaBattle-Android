@@ -11,6 +11,12 @@ open class RectangleFigure (posX1: Int, posX2: Int,
     protected val posToY = max(posY1, posY2)
 
     private val cells : Set<Cell> = generateCells()
+    fun width() : Int {
+        return posToX - posFromX
+    }
+    fun height() : Int {
+        return posToY - posFromY
+    }
 
     private fun generateCells() : Set<Cell> {
         val res = HashSet<Cell>()
@@ -41,8 +47,14 @@ open class RectangleFigure (posX1: Int, posX2: Int,
 
     override fun intersect(figure: Figure): Boolean {
         if (figure is RectangleFigure) {
-            return (figure.posFromX in posFromX..posToX || figure.posToX in posFromX..posToX) &&
-                    (figure.posFromY in posFromY..posToY || figure.posToY in posFromY..posToY)
+            return (figure.posFromX in posFromX..posToX
+                    || figure.posToX in posFromX..posToX
+                    || posFromX in figure.posFromX..figure.posToX
+                    || posToX in figure.posFromX..figure.posToX)
+                    && (figure.posFromY in posFromY..posToY
+                    || figure.posToY in posFromY..posToY
+                    || posFromY in figure.posFromY..figure.posToY
+                    || posToY in figure.posFromY..figure.posToY)
         }
         return super.intersect(figure)
     }
