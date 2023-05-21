@@ -1,5 +1,7 @@
 package com.example.seabattle.data.model.gameobjects
 
+import android.content.Context
+
 interface ShipPackBuilder <ShipPack> {
     @Throws(ShipSetBuilderException::class)
     fun tryAdd(ship: Ship)
@@ -14,6 +16,13 @@ interface ShipPackBuilder <ShipPack> {
     @Throws(ShipSetBuilderException::class)
     fun tryBuild() : ShipPack
 
-    class ShipSetBuilderException(message:String): Exception(message)
+    class ShipSetBuilderException(message:String, private val resMessageId : Int? = null): Exception(message) {
+        fun getMessageByContext(context: Context): String? {
+            if (resMessageId == null) {
+                return super.getLocalizedMessage()
+            }
+            return context.getString(resMessageId)
+        }
+    }
 }
 

@@ -26,118 +26,107 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/pre_game__form"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/pre_game__navigation_bar"
-        app:layout_constraintBottom_toTopOf="@id/pre_game__ready_button"
-        app:cardCornerRadius="5dp"
         android:layout_marginHorizontal="10dp"
-        app:cardBackgroundColor="@color/white"
         >
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/pre_game__clear_button"
-                android:layout_width="wrap_content"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pre_game_board_block_out"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Clear"
-                android:backgroundTint="?attr/colorSecondary"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_margin="5dp"/>
+                app:cardCornerRadius="5dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/pre_game_board_block"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        >
+                        <include
+                            android:id="@+id/pre_game__game_board"
+                            layout="@layout/game_board"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/pre_game__auto_button"
-                android:layout_width="wrap_content"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/pre_game__form_block__global"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/pre_game_board_block"
+                        android:background="@color/blue_200"
+                        >
+                        <Button
+                            android:id="@+id/pre_game__clear_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Clear"
+                            android:backgroundTint="?attr/colorSecondary"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginHorizontal="5dp"/>
+
+                        <Button
+                            android:id="@+id/pre_game__auto_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Auto"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginHorizontal="5dp"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pre_game__form_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Auto"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_margin="5dp"/>
-
-            <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/pre_game__form__top_button_barrier"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:barrierDirection="bottom"
-                app:constraint_referenced_ids="pre_game__clear_button, pre_game__auto_button"
-                />
-
-            <GridLayout
-                android:id="@+id/pre_game__grid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pre_game__form__top_button_barrier"
-                app:layout_constraintBottom_toTopOf="@id/pre_game__form__button_barrier"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:orientation="vertical"
-                android:background="@color/blue_500">
-            </GridLayout>
-
-            <Button
-                android:id="@+id/pre_game__form__delete_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.45"
-                app:layout_constraintWidth_max="320dp"
-                app:layout_constrainedWidth="true"
-
+                app:layout_constraintTop_toBottomOf="@id/pre_game_board_block_out"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/pre_game__form__add_button"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                android:layout_margin="5dp"
-                android:textSize="15sp"
-
-                android:backgroundTint="?attr/colorSecondary"
-                android:text="@string/deleteButton"
-                />
-
-            <Button
-                android:id="@+id/pre_game__form__add_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.45"
-                app:layout_constraintWidth_max="320dp"
-                app:layout_constrainedWidth="true"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/pre_game__form__delete_button"
-                android:layout_margin="5dp"
-                android:textSize="15sp"
-
-                android:text="@string/addButton"
-                />
-
-            <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/pre_game__form__button_barrier"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:barrierDirection="top"
-                app:constraint_referenced_ids="pre_game__form__delete_button, pre_game__form__add_button"
-                />
+                app:layout_constraintVertical_bias="0"
+                android:backgroundTint="@color/blue_100"
+                app:cardCornerRadius="5dp"
+                >
+            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/pre_game__ready_button"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/pre_game__ready_button_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintWidth_max="640dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/pre_game__ready__error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/pre_game__form__button_container"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/red_a400"
+            android:textAlignment="center">
+        </TextView>
 
-        app:layout_constraintTop_toBottomOf="@id/pre_game__form"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginVertical="5dp"
-        android:layout_marginHorizontal="10dp"
-        android:textSize="15sp"
-        android:text="@string/readyButton"
-        />
+        <Button
+            android:id="@+id/pre_game__ready_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="15sp"
+            android:text="@string/readyButton"
+            />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,19 +1,24 @@
 package com.example.seabattle.data.model.gameobjects
 
+import com.example.seabattle.R
 import com.example.seabattle.data.model.gameobjects.ShipPackBuilder.ShipSetBuilderException
+import java.util.stream.Collectors
 import kotlin.random.Random
 
 open class StandardShipPackBuilder(private val board: Figure) : ShipPackBuilder<List<Ship>> {
     private val shipSet : MutableSet<Ship> = HashSet()
+    fun shipSet() : Set<Ship> = shipSet
+    fun shipCells() : Set<Cell> = shipSet.stream().flatMap { ship -> ship.getCells().stream() }.collect(
+        Collectors.toSet())
     override fun tryAdd(ship: Ship) {
         if (shipSet.contains(ship)) {
-            throw ShipSetBuilderException("This ship already exists")
+            throw ShipSetBuilderException("This ship already exists", R.string.shipAlreadyExistMessage)
         }
         if (!board.includeWhole(ship)) {
-            throw ShipSetBuilderException("This ship can't be placed on the Board")
+            throw ShipSetBuilderException("This ship has cells out of the Board", R.string.shipOutOfBoardMessage)
         }
         if (shipSet.stream().anyMatch(ship.getContainerFigure()::intersect)) {
-            throw ShipSetBuilderException("This ship too close to another ships")
+            throw ShipSetBuilderException("This ship too close to another ships", R.string.shipTooCloseMessage)
         }
         tryCheckRulesForAdd(ship)
 
@@ -23,7 +28,7 @@ open class StandardShipPackBuilder(private val board: Figure) : ShipPackBuilder<
 
     override fun tryDelete(ship: Ship) {
         if (!shipSet.contains(ship)) {
-            throw ShipSetBuilderException("This ship doesn't exist")
+            throw ShipSetBuilderException("This ship doesn't exist", R.string.shipNotExistMessage)
         }
         shipSet.remove(ship)
         println("Successfully Delete : $ship")
@@ -50,7 +55,7 @@ open class StandardShipPackBuilder(private val board: Figure) : ShipPackBuilder<
         val expectSize = shipTypesExpectCounts.sum()
         val curSize = shipSet.size
         if (curSize != expectSize) {
-            throw ShipSetBuilderException("@string/game")
+            throw ShipSetBuilderException("Expected $expectSize ships, found $curSize", R.string.wrongShipsCountMessage)
         }
 
         for(typeI in shipTypes.indices) {
@@ -58,7 +63,7 @@ open class StandardShipPackBuilder(private val board: Figure) : ShipPackBuilder<
             val expectTypeCount = shipTypesExpectCounts[typeI]
             val curTypeCount = type.countIn(shipSet)
             if (curTypeCount != expectTypeCount) {
-                throw ShipSetBuilderException("Expected $expectTypeCount count $type ships, found $curTypeCount")
+                throw ShipSetBuilderException("Expected $expectTypeCount count $type ships, found $curTypeCount", R.string.wrongShipsCountForTypeMessage)
             }
         }
     }
@@ -67,19 +72,25 @@ open class StandardShipPackBuilder(private val board: Figure) : ShipPackBuilder<
         val expectSize = shipTypesExpectCounts.sum()
         val curSize = shipSet.size
         if (curSize >= expectSize) {
-            throw ShipSetBuilderException("Can't add ship to full collection")
+            throw ShipSetBuilderException("Can't add ship to full collection", R.string.fullShipCollectionMessage)
         }
 
+        var hasType = false
         for(typeI in shipTypes.withIndex()
             .filter { (_, shipType) -> shipType.isAccept(ship) }
             .map { indexedValue -> indexedValue.index }) {
+            hasType = true
             val type = shipTypes[typeI]
             val expectTypeCount = shipTypesExpectCounts[typeI]
             val curTypeCount = type.countIn(shipSet)
             if (curTypeCount >= expectTypeCount) {
                 throw ShipSetBuilderException(
-                    "Can't add new $type ship, $curTypeCount these ships already have been placed")
+                    "Can't add new $type ship, $curTypeCount these ships already have been placed", R.string.fullShipTypeMessage)
             }
+        }
+        if (!hasType) {
+            throw ShipSetBuilderException(
+                "Can't add new ship. This ship has unexpected type", R.string.unexpectedShipTypeMessage)
         }
     }
 
@@ -124,10 +135,10 @@ open class StandardShipPackBuilder(private val board: Figure) : ShipPackBuilder<
                         } catch (_ : ShipSetBuilderException) {}
                     }
                 }
-                throw ShipSetBuilderException("There isn't enough place for $type ship")
+                throw ShipSetBuilderException("There isn't enough place for $type ship", R.string.noEnoughSpaceMessage)
             }
         }
-        throw ShipSetBuilderException("Can't add ship to full collection")
+        throw ShipSetBuilderException("Can't add ship to full collection", R.string.fullShipCollectionMessage)
     }
 
     override fun tryComplete() {
@@ -157,7 +168,12 @@ open class StandardShipPackBuilder(private val board: Figure) : ShipPackBuilder<
 
     class LinearType(private val length : Int) : ShipType {
         override fun isAccept(obj: Ship): Boolean {
-            return (obj is LinearShip) && (obj.size() == length)
+            if (obj is LinearShip) {
+                return (obj.size() == length)
+            } else if (obj is RectangleShip) {
+                return (obj.height() == 0 || obj.width() == 0) && (obj.size() == length)
+            }
+            return false
         }
         private var prevGen : LinearShip? = null
         private var hasNext = false

@@ -35,7 +35,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_percent="0.7"
-        app:layout_constraintWidth_max="400dp" />
+        app:layout_constraintWidth_max="320dp" />
 
     <Button
         android:id="@+id/exit_button"

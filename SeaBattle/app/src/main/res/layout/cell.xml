@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cell"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/cell_dimen"
-    android:layout_height="@dimen/cell_dimen"
-    android:background="@drawable/cell"
-    android:gravity="center"
-    android:textColor="@color/black"
-    android:textSize="18sp" />
+    android:layout_height="@dimen/cell_dimen">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0.75dp"
+        app:cardBackgroundColor="@color/blue_100"
+        app:cardCornerRadius="2dp">
+        <TextView
+            android:id="@+id/cell"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            tools:ignore="SpUsage" />
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
+
