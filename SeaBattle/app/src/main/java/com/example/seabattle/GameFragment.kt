@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.seabattle.adapter.CellAdapter
 import com.example.seabattle.data.model.gameobjects.Cell
-import com.example.seabattle.data.model.gameobjects.Ship
 import com.example.seabattle.databinding.FragmentGameBinding
 
 private const val ARG_GAME_START_PACK = "gameStartPack"
