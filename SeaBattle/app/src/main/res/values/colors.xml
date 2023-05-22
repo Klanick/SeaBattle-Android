@@ -13,4 +13,6 @@
     <color name="gray">#757575</color>
     <color name="gray_light">#BDBDBD</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="TextBlackAndWhite">#FF000000</color>
 </resources>
