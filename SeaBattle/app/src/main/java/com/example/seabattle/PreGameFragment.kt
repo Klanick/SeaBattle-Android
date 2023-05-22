@@ -45,6 +45,26 @@ class PreGameFragment : Fragment() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { state ->
+                    fun setErrorMessage(message : String?,
+                                        position: PreGameViewModel.State.ErrorPosition =
+                                            PreGameViewModel.State.ErrorPosition.globalError) {
+                        if (message == null || message == "") {
+                            val error = state.error.value
+                            if (error != null && error.position == position) {
+                                state.error.value = PreGameViewModel.State.ErrorMessage(
+                                    "",
+                                    position
+                                )
+                            }
+
+                        } else {
+                            state.error.value = PreGameViewModel.State.ErrorMessage(
+                                message,
+                                position
+                            )
+                        }
+                    }
+
                     val gridLayout = binding.preGameGameBoard.preGameGrid
                     gridLayout.rowCount = 10
                     gridLayout.columnCount = 10
@@ -57,7 +77,12 @@ class PreGameFragment : Fragment() {
                             cellView.isClickable = true
                             cellView.id
                             cellView.setOnClickListener {
-                                state.clickCell(Cell(x, y))
+                                try {
+                                    state.clickCell(Cell(x, y))
+                                } catch (e: ShipPackBuilder.ShipSetBuilderException) {
+                                    setErrorMessage(e.getMessageByContext(requireContext()),
+                                        PreGameViewModel.State.ErrorPosition.localError)
+                                }
                             }
                             cellViews.add(cellView)
                         }
@@ -91,15 +116,17 @@ class PreGameFragment : Fragment() {
 
                     reColorAll(cellViews)
 
-                    fun setErrorMessage(message : String?) {
-                        if (message == null || message == "") {
-                            state.errorPosition.value = null
+                    fun initErrorMessage() {
+                        val error = state.error.value
+                        if (error != null &&
+                            error.position == PreGameViewModel.State.ErrorPosition.globalError) {
+                            binding.preGameReadyErrorMessage.text = error.message
                         } else {
-                            state.errorPosition.value = PreGameViewModel.State.ErrorPosition.globalError
+                            binding.preGameReadyErrorMessage.text = null
                         }
-
-                        binding.preGameReadyErrorMessage.text = message
                     }
+
+                    initErrorMessage()
 
                     state.packWasChanged.observe(viewLifecycleOwner) {
                         reColorAll(cellViews)
@@ -140,13 +167,8 @@ class PreGameFragment : Fragment() {
                             FragmentManager.POP_BACK_STACK_INCLUSIVE)
                     }
 
-
-
-                    state.errorPosition.observe(viewLifecycleOwner) {
-                        val pos = state.errorPosition.value
-                        if (pos != null && pos != PreGameViewModel.State.ErrorPosition.globalError) {
-                            setErrorMessage(null)
-                        }
+                    state.error.observe(viewLifecycleOwner) {
+                        initErrorMessage()
                     }
 
                     binding.preGameAutoButton.setOnClickListener {

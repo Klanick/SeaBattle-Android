@@ -7,7 +7,6 @@ import com.example.seabattle.data.model.gameobjects.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.parcelize.Parcelize
-import kotlin.math.abs
 
 class PreGameViewModel : ViewModel() {
     private val _state = MutableStateFlow(State(board = RectangleFigure(0, 9, 0, 9)))
@@ -19,8 +18,8 @@ class PreGameViewModel : ViewModel() {
         val chosenShip : MutableLiveData<Ship?> = MutableLiveData(null)
         val chosenShipType : MutableLiveData<ChosenShipType?> = MutableLiveData(null)
         val packWasChanged = MutableLiveData<Boolean>()
-        val errorPosition = MutableLiveData<ErrorPosition?>(null)
-
+        val error = MutableLiveData<ErrorMessage?>(null)
+        class ErrorMessage(val message: String, val position: ErrorPosition)
         enum class ErrorPosition {
             localError, globalError
         }
@@ -89,6 +88,15 @@ class PreGameViewModel : ViewModel() {
             return GameStartPack(ships, opponentShips)
         }
         fun clickCell(cell : Cell) {
+            if (getExistShipCells().contains(cell)) {
+                tryDeleteChosen()
+                return
+            }
+
+            if (getNewShipCells().contains(cell)) {
+                tryAddChosen()
+                return
+            }
             val oldCell = chosenCell
             if (oldCell != null) {
                 if (oldCell.posX == cell.posX || oldCell.posY == cell.posY) {
