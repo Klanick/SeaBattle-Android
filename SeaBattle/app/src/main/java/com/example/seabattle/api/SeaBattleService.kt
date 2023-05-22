@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SeaBattleService {
 
-    private val url = "http://192.168.1.101:8080"
+    private val url = "http://10.208.178.58:8080"
 
     private var seaBattleApi = createRetrofit().create(SeaBattleApi::class.java)
 
