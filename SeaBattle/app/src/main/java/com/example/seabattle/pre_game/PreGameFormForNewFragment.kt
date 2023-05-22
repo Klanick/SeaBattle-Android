@@ -55,11 +55,32 @@ class PreGameFormForNewFragment : Fragment() {
                         state.cancelChoose()
                     }
 
+                    fun initErrorMessage() {
+                        val error = state.error.value
+                        if (error != null &&
+                            error.position == PreGameViewModel.State.ErrorPosition.localError) {
+                            binding.preGameFormErrorMessage.text = error.message
+                        } else {
+                            binding.preGameFormErrorMessage.text = null
+                        }
+                    }
+
+                    initErrorMessage()
+
                     fun setErrorMessage(message : String?) {
                         if (message == null || message == "") {
-                            state.errorPosition.value = null
+                            val error = state.error.value
+                            if (error != null && error.position == PreGameViewModel.State.ErrorPosition.localError) {
+                                state.error.value = PreGameViewModel.State.ErrorMessage(
+                                    "",
+                                    PreGameViewModel.State.ErrorPosition.localError
+                                )
+                            }
                         } else {
-                            state.errorPosition.value = PreGameViewModel.State.ErrorPosition.localError
+                            state.error.value = PreGameViewModel.State.ErrorMessage(
+                                message,
+                                PreGameViewModel.State.ErrorPosition.localError
+                            )
                         }
 
                         binding.preGameFormErrorMessage.text = message
@@ -69,11 +90,8 @@ class PreGameFormForNewFragment : Fragment() {
                         setErrorMessage(null)
                     }
 
-                    state.errorPosition.observe(viewLifecycleOwner) {
-                        val pos = state.errorPosition.value
-                        if (pos != null && pos != PreGameViewModel.State.ErrorPosition.localError) {
-                            setErrorMessage(null)
-                        }
+                    state.error.observe(viewLifecycleOwner) {
+                        initErrorMessage()
                     }
 
                     binding.preGameFormCancelButton.setOnClickListener {
