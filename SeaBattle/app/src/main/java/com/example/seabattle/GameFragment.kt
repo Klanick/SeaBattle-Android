@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -184,8 +185,8 @@ class GameFragment : Fragment() {
                                             turn = Turn.NONE
 
                                             addStatistics(true,
-                                                defeatedShips(getOurShips(), imageViews).toLong(),
-                                                defeatedShips(getOpponentShips(), imageViews2).toLong()
+                                                defeatedShips(getOpponentShips(), imageViews).toLong(),
+                                                defeatedShips(getOurShips(), imageViews2).toLong()
                                             )
 
                                             val handler = Handler()
@@ -195,7 +196,7 @@ class GameFragment : Fragment() {
                                                         "MenuToGame",
                                                         FragmentManager.POP_BACK_STACK_INCLUSIVE
                                                     )
-                                                }, 3000
+                                                }, 5000
                                             )
                                         }
                                     }
@@ -276,8 +277,8 @@ class GameFragment : Fragment() {
                     Looper.prepare()
                     addStatistics(
                         false,
-                        defeatedShips(getOurShips(), imageViews).toLong(),
-                        defeatedShips(getOpponentShips(), imageViews).toLong()
+                        defeatedShips(getOpponentShips(), imageViews2).toLong(),
+                        defeatedShips(getOurShips(), imageViews).toLong()
                     )
                     lose()
                 }
@@ -303,7 +304,7 @@ class GameFragment : Fragment() {
 
     private fun lose() {
         thread {
-            Thread.sleep(3000)
+            Thread.sleep(5000)
             requireActivity().supportFragmentManager.popBackStack(
                 "MenuToGame",
                 FragmentManager.POP_BACK_STACK_INCLUSIVE
@@ -312,16 +313,24 @@ class GameFragment : Fragment() {
     }
 
     private fun addStatistics(win: Boolean, shipsDestroyed: Long, shipsLost: Long) {
-        val sPreferences: SharedPreferences? = context?.getSharedPreferences("ref", Context.MODE_PRIVATE)
 
-        val realUsername = sPreferences?.getString(R.string.currentUsername.toString(), "").orEmpty()
+        val context = requireActivity().applicationContext
+        val resources = requireActivity().resources
+
+        val sPreferences: SharedPreferences? =
+            context?.getSharedPreferences("ref", Context.MODE_PRIVATE)
+
+        val realUsername =
+            sPreferences?.getString(R.string.currentUsername.toString(), "").orEmpty()
 
         if (realUsername.isEmpty()) {
-            Toast.makeText(
+            val toast = Toast.makeText(
                 context,
                 resources.getText(R.string.UserIsNotLoggedIn),
-                Toast.LENGTH_SHORT
-            ).show()
+                Toast.LENGTH_LONG
+            )
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
             return
         }
 
@@ -333,43 +342,49 @@ class GameFragment : Fragment() {
             shipsDestroyed,
             shipsLost
         )
+
         SeaBattleService().getApi().addStatistic(dto)
             .enqueue(object : Callback<BooleanResponse> {
                 override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
-                    if (t::class == ConnectException::class ||
+                    val toast = if (t::class == ConnectException::class ||
                         t::class == SocketTimeoutException::class
                     ) {
                         Toast.makeText(
                             context,
                             resources.getText(R.string.lostConnection),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            Toast.LENGTH_LONG
+                        )
                     } else {
                         Toast.makeText(
                             context,
                             resources.getText(R.string.unexpectedError),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            Toast.LENGTH_LONG
+                        )
                     }
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
 
                 override fun onResponse(
                     call: Call<BooleanResponse>,
                     response: Response<BooleanResponse>
                 ) {
-                    if (!response.isSuccessful || response.body()!!.getMessage() != "") {
-                        Toast.makeText(
-                            context,
-                            resources.getText(R.string.unexpectedError),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        Toast.makeText(
-                            context,
-                            resources.getText(R.string.dataSaved),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    val toast =
+                        if (!response.isSuccessful || response.body()!!.getMessage() != "") {
+                            Toast.makeText(
+                                context,
+                                resources.getText(R.string.unexpectedError),
+                                Toast.LENGTH_LONG
+                            )
+                        } else {
+                            Toast.makeText(
+                                context,
+                                resources.getText(R.string.dataSaved),
+                                Toast.LENGTH_LONG
+                            )
+                        }
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
             })
     }
@@ -389,7 +404,9 @@ class GameFragment : Fragment() {
         return ships.map{
             it.getCells()
         }.count {
-            it.all { cell -> ((imageViews[cell.posY * 10 + cell.posX][0] as CardView)[0] as TextView).text == "X" }
+            cells -> cells.all {
+                cell -> ((imageViews[cell.posY * 10 + cell.posX][0] as CardView)[0] as TextView).text == "X"
+            }
         }
     }
 
