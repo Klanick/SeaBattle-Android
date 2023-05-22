@@ -19,7 +19,6 @@
     <string name="lostConnection">Connection to the server is lost</string>
     <string name="app_name">Sea battle</string>
     <string name="game">Game</string>
-    <string name="quit">Exit</string>
     <string name="profileName">PROFILE</string>
     <string name="exit">EXIT</string>
     <string name="ship_failed">Ships lost</string>
@@ -31,7 +30,7 @@
     <string name="SkipButton">Skip</string>
     <string name="Clear">Clear</string>
     <string name="Auto">Auto</string>
-  
+
     <string name="validationUsernameMessage">Invalid username</string>
     <string name="validationPasswordMessage">Invalid password</string>
 
@@ -45,4 +44,12 @@
     <string name="noEnoughSpaceMessage">No enough space</string>
     <string name="shipAlreadyExistMessage">Ship already exist</string>
     <string name="shipNotExistMessage">Ship don\'t exist</string>
+
+    <string name="YourTurn">Now is Your turn</string>
+    <string name="BotTurn">Now is Bot turn</string>
+    <string name="FoundCell">You hit an enemy ship</string>
+    <string name="FoundShip">You sank an enemy ship</string>
+    <string name="Miss">Miss</string>
+    <string name="YouWin">Congratulations! You Win!</string>
+    <string name="YouLose">Unfortunately:( You lose</string>
 </resources>
