@@ -273,7 +273,7 @@ class GameFragment : Fragment() {
 
                     gameTextView.text = resources.getText(R.string.YouLose)
                     turn = Turn.NONE
-
+                    Looper.prepare()
                     addStatistics(
                         false,
                         defeatedShips(getOurShips(), imageViews).toLong(),
@@ -314,7 +314,6 @@ class GameFragment : Fragment() {
     private fun addStatistics(win: Boolean, shipsDestroyed: Long, shipsLost: Long) {
         val sPreferences: SharedPreferences? = context?.getSharedPreferences("ref", Context.MODE_PRIVATE)
 
-        Looper.prepare()
         val realUsername = sPreferences?.getString(R.string.currentUsername.toString(), "").orEmpty()
 
         if (realUsername.isEmpty()) {
