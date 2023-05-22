@@ -52,4 +52,6 @@
     <string name="Miss">Miss</string>
     <string name="YouWin">Congratulations! You Win!</string>
     <string name="YouLose">Unfortunately:( You lose</string>
+    <string name="UserIsNotLoggedIn">User is not logged in</string>
+    <string name="dataSaved">Game data saved</string>
 </resources>
