@@ -67,4 +67,6 @@
     <string name="Miss">Мимо</string>
     <string name="YouWin">Поздравляем! Вы выиграли!</string>
     <string name="YouLose">К сожалению:( Вы проиграли</string>
+    <string name="UserIsNotLoggedIn">Пользователь не залогинен</string>
+    <string name="dataSaved">Данные игры сохранены</string>
 </resources>

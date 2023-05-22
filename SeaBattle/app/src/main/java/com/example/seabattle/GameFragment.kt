@@ -1,8 +1,11 @@
 package com.example.seabattle
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,11 +20,19 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.seabattle.api.SeaBattleService
+import com.example.seabattle.api.model.BooleanResponse
+import com.example.seabattle.api.model.StatisticDto
 import com.example.seabattle.bot.SeaBattleBot
 import com.example.seabattle.data.model.gameobjects.Cell
 import com.example.seabattle.data.model.gameobjects.Ship
 import com.example.seabattle.databinding.FragmentGameBinding
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 import kotlin.concurrent.thread
 
 private const val ARG_GAME_START_PACK = "gameStartPack"
@@ -167,8 +178,15 @@ class GameFragment : Fragment() {
                                             Toast.LENGTH_SHORT
                                         )
 
-                                        if (win(imageViews, gameStartPack.opponentShips)) {
+                                        // --------------------- WIN ---------------------
+                                        if (isWin(imageViews, gameStartPack.opponentShips)) {
                                             gameTextView.text = resources.getText(R.string.YouWin)
+                                            turn = Turn.NONE
+
+                                            addStatistics(true,
+                                                defeatedShips(getOurShips(), imageViews).toLong(),
+                                                defeatedShips(getOpponentShips(), imageViews2).toLong()
+                                            )
 
                                             val handler = Handler()
                                             handler.postDelayed(
@@ -179,7 +197,6 @@ class GameFragment : Fragment() {
                                                     )
                                                 }, 3000
                                             )
-                                            turn = Turn.NONE
                                         }
                                     }
 
@@ -205,7 +222,7 @@ class GameFragment : Fragment() {
 
                                     /// --------------ALARM--------------_BOT_ATTACKS_--------------ALARM--------------
 
-                                    botAttacks(imageViews2, gameTextView)
+                                    botAttacks(imageViews2, gameTextView, imageViews)
                                 }
                             }
                             imageViews.add(cellView)
@@ -227,15 +244,7 @@ class GameFragment : Fragment() {
 
     }
 
-    private fun win(imageViews: ArrayList<FrameLayout>, ships: List<Ship>): Boolean {
-        return ships.all {
-            it.getCells().all { cell ->
-                ((imageViews[cell.posY * 10 + cell.posX][0] as CardView)[0] as TextView).text == "X"
-            }
-        }
-    }
-
-    private fun botAttacks(imageViews: ArrayList<FrameLayout>, gameTextView: TextView) {
+    private fun botAttacks(imageViews: ArrayList<FrameLayout>, gameTextView: TextView, imageViews2: ArrayList<FrameLayout>) {
         thread {
             if (turn != Turn.BOT) {
                 return@thread
@@ -259,14 +268,24 @@ class GameFragment : Fragment() {
                     fillAllAround(ship, imageViews)
                 }
 
-                if (win(imageViews, gameStartPack.ships)) {
+                //--------------------- LOSE ---------------------
+                if (isWin(imageViews, gameStartPack.ships)) {
+
                     gameTextView.text = resources.getText(R.string.YouLose)
+                    turn = Turn.NONE
+
+                    addStatistics(
+                        false,
+                        defeatedShips(getOurShips(), imageViews).toLong(),
+                        defeatedShips(getOpponentShips(), imageViews).toLong()
+                    )
                     lose()
                 }
 
                 // --------------------- NEXT ATTACK ---------------------
-                botAttacks(imageViews, gameTextView)
+                botAttacks(imageViews, gameTextView, imageViews2)
             } else {
+                // --------------------- MISS ---------------------
                 ((imageViews[cell.posY * 10 + cell.posX][0] as CardView)[0] as TextView).text = "O"
                 gameTextView.text = yourTurn
                 turn = Turn.USER
@@ -274,8 +293,15 @@ class GameFragment : Fragment() {
         }
     }
 
+    private fun isWin(imageViews: ArrayList<FrameLayout>, ships: List<Ship>): Boolean {
+        return ships.all {
+            it.getCells().all { cell ->
+                ((imageViews[cell.posY * 10 + cell.posX][0] as CardView)[0] as TextView).text == "X"
+            }
+        }
+    }
+
     private fun lose() {
-        turn = Turn.NONE
         thread {
             Thread.sleep(3000)
             requireActivity().supportFragmentManager.popBackStack(
@@ -283,6 +309,70 @@ class GameFragment : Fragment() {
                 FragmentManager.POP_BACK_STACK_INCLUSIVE
             )
         }
+    }
+
+    private fun addStatistics(win: Boolean, shipsDestroyed: Long, shipsLost: Long) {
+        val sPreferences: SharedPreferences? = context?.getSharedPreferences("ref", Context.MODE_PRIVATE)
+
+        Looper.prepare()
+        val realUsername = sPreferences?.getString(R.string.currentUsername.toString(), "").orEmpty()
+
+        if (realUsername.isEmpty()) {
+            Toast.makeText(
+                context,
+                resources.getText(R.string.UserIsNotLoggedIn),
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        val dto = StatisticDto(
+            realUsername,
+            1,
+            if (win) 1 else 0,
+            if (win) 0 else 1,
+            shipsDestroyed,
+            shipsLost
+        )
+        SeaBattleService().getApi().addStatistic(dto)
+            .enqueue(object : Callback<BooleanResponse> {
+                override fun onFailure(call: Call<BooleanResponse>, t: Throwable) {
+                    if (t::class == ConnectException::class ||
+                        t::class == SocketTimeoutException::class
+                    ) {
+                        Toast.makeText(
+                            context,
+                            resources.getText(R.string.lostConnection),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            context,
+                            resources.getText(R.string.unexpectedError),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onResponse(
+                    call: Call<BooleanResponse>,
+                    response: Response<BooleanResponse>
+                ) {
+                    if (!response.isSuccessful || response.body()!!.getMessage() != "") {
+                        Toast.makeText(
+                            context,
+                            resources.getText(R.string.unexpectedError),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            context,
+                            resources.getText(R.string.dataSaved),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            })
     }
 
     private fun fillAllAround(ship: Ship, imageViews: ArrayList<FrameLayout>) {
@@ -296,8 +386,20 @@ class GameFragment : Fragment() {
         }
     }
 
+    private fun defeatedShips(ships: List<Ship>, imageViews: List<FrameLayout>): Int {
+        return ships.map{
+            it.getCells()
+        }.count {
+            it.all { cell -> ((imageViews[cell.posY * 10 + cell.posX][0] as CardView)[0] as TextView).text == "X" }
+        }
+    }
+
     private fun getOurShips(): List<Ship> {
         return gameStartPack.ships
+    }
+
+    private fun getOpponentShips(): List<Ship> {
+        return gameStartPack.opponentShips
     }
 
     override fun onDestroy() {
