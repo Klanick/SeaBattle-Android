@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import com.example.seabattle.api.SeaBattleService
 import com.example.seabattle.api.model.BooleanResponse
 import com.example.seabattle.api.model.StatisticDto
@@ -33,12 +34,14 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private var sPreferences: SharedPreferences? = null
+    private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,10 +65,11 @@ class ProfileFragment : Fragment() {
                     call: Call<StatisticDto>,
                     response: Response<StatisticDto>
                 ) {
-                    setTextView(R.id.shipsLostCount, response.body()?.getTotalShipsLost().toString())
-                    setTextView(R.id.shipsDestroyedCount, response.body()?.getTotalShipsDestroyed().toString())
-                    setTextView(R.id.victoriesCount, response.body()?.getTotalWins().toString())
-                    setTextView(R.id.defeatsCount, response.body()?.getTotalLoses().toString())
+                    viewModel.statistic = response.body()
+                    setTextView(R.id.shipsLostCount, viewModel.statistic?.getTotalShipsLost().toString())
+                    setTextView(R.id.shipsDestroyedCount, viewModel.statistic?.getTotalShipsDestroyed().toString())
+                    setTextView(R.id.victoriesCount, viewModel.statistic?.getTotalWins().toString())
+                    setTextView(R.id.defeatsCount, viewModel.statistic?.getTotalLoses().toString())
                 }
             })
         exitProfileButton.setOnClickListener {
